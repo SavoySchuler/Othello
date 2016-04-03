@@ -1,6 +1,8 @@
 # Othello
 CSC447 Artificial Intelligence - Project 3
 
+Partners: Savoy Schuler, Alex Nienhueser
+
 To do:
 
 	Input
