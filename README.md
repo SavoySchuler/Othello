@@ -1,2 +1,17 @@
 # Othello
 CSC447 Artificial Intelligence - Project 3
+
+To do:
+
+	Input
+	Minimax
+	Check Valid Move
+	Heuristics
+	make-move
+	generate successors
+
+Completed:
+
+	Output (Variable? Alex? What?)
+	Create the move (returns list of table)
+
