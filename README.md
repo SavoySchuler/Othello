@@ -7,14 +7,15 @@ To do:
 
 	Input			- Savoy
 	Minimax			- Savoy
+	documentation		- Savoy	
+	Heuristics		- Savoy
 	Check Valid Move	- Alex
-	Heuristics			-Savoy
-	make-move			-Alex
-	generate successors	-Alex
-	documentation	- Savoy
+	make-move		- Alex
+	generate successors	- Alex
+	
 
 Completed:
 
-	Output (Variable? Alex? What?)			-Alex
+	Output (Variable? Alex? What?)		-Alex
 	Create the move (returns list of table) - Alex
 
