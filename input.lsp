@@ -1,61 +1,63 @@
+(defvar *player* NIL)
+(defvar *firstPlayer* NIL) 
+
 (defun input(args)
 	(let ((filename) (puzList))
-		(cond
-			((= (length args) 1)    
-				(cond
+			(when(= (length args) 1)    
 				
-					((equal "Black" (car args))
-						(setf player 'b)
+				
+					(when (equalp "Black" (car args))
+						(setf *player* 'b)
+						(firstMove)
 					)
 			
-					((equal "White" (car args))
-						(setf player 'w)
+					(when (equalp "White" (car args))
+						(setf *player* 'w)
+						(firstMove)
 					)
-				)	
-			
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				(format t "Would you like to move first [y/n]? ") 
-				(setf firstPlayer (read)) 
-				(cond
 
-					((equal 'y firstPlayer)
-						(setf firstPlayer 'y)
+					(when (equalp "b" (car args))
+						(setf *player* 'b)
+						(firstMove)					
 					)
 			
-					((equal 'n firstPlayer)
-						(setf firstPlayer 'n)
+					(when (equalp "w" (car args))
+						(setf *player* 'w)
+						(firstMove)
 					)
 					
-			(t (input (car args)))
-				)	
-				
-				
-				
-				
-				
-				;(set firstPlayer (read)) 								
-			
+					(when (null *player*)
+						(print "Usage: clisp Othello.lsp <player - 'Black' or 'White'>") 
+					)						
 			)
-			
-			; else statement prints usage statement
-			(t "Usage: clisp Othello.lsp <player - 'Black' or 'White'>")
-		)	
-
 	)
+)	
+	
+
+				
+(defun firstMove ()
+	(format t "Would you like to move first [y/n]? ") 
+	(let (temp)	(setf temp (read))
+	
+	(when (equalp 'y temp)
+		(setf *firstPlayer* 'y)
+	)
+			
+	(when (equalp 'n temp)
+		(setf *firstPlayer* 'n)
+	)
+					
+	(when (null *firstPlayer*) 
+		(print "Please enter 'y' or 'n'.")
+		(firstMove)
+	)							
+	
+	)				
 )
-
-
-
+	
+#|
 ;Testing
 (input *args*);function call
-(print player)
-(print firstPlayer)
-
+(print *player*)
+(print *firstPlayer*)
+|#
