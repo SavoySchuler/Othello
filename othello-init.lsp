@@ -1,1 +1,1 @@
-(defund othello-init())
+(defun othello-init())

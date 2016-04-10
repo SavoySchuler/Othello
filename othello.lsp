@@ -3,8 +3,9 @@
 
 
 (defun othello (args)
-	(input (car args))	
+	(input args)
+	;(print *player*)	;TESTING
 )
 
 
-(8puzzle (input *args*))
+(othello *args*)

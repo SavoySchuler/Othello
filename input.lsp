@@ -50,8 +50,3 @@
 	)
 )
 
-#|
-;Testing
-(input *args*);function call
-(print *player*)
-|#
