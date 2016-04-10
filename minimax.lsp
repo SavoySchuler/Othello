@@ -41,9 +41,10 @@ Functions called:
         (let
             (
                 ; generate list of sucessor positions
-                (successors (move-generator position))
-
-                ; initialize current best path to nil
+                ;(successors (move-generator position))
+		(successors (GenerateSuccessors position))		;Name change
+                
+		; initialize current best path to nil
                 (best-path nil)
 
                 ; initialize current best score to negative infinity
@@ -76,4 +77,16 @@ Functions called:
             (list best-score best-path)
         )
     )
+)
+
+(defun deepenough (depth)
+	(if (eq 0 depth) 
+		(t)
+		(NIL)
+	)
+)
+
+(defun static (position)
+
+
 )

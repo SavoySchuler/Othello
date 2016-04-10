@@ -9,12 +9,12 @@ To do:
 	Heuristics		- Savoy
 	documentation		- Savoy	
 	makeMove		- Alex
-	generate successors	- Alex
 	othello-init		- ?
 	
 
 Completed:
 	Input (not documented)	- Savoy
+	generate successors	- Alex
 	Output 			-Alex
 	validMove		- Alex
 
