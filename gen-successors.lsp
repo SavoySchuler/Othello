@@ -159,6 +159,8 @@
 ;		(PrintOthello leftDown)
 ;		(PrintOthello rightDown)
 		(setf childern(remove nil childern))
+		(setf childern(remove-duplicates childern :test #'equal))
+		
 		(print "")
 		(print "")
 		(print "")
@@ -166,6 +168,8 @@
 		(dolist (indexX childern)
 			(PrintOthello indexX)
 		)
+		
+		childern
 
 	)
 )
