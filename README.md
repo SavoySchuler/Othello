@@ -5,17 +5,17 @@ Partners: Savoy Schuler, Alex Nienhueser
 
 To do:
 
+	Main			- Savoy	
 	Input			- Savoy
 	Minimax			- Savoy
-	documentation		- Savoy	
 	Heuristics		- Savoy
-	Check Valid Move	- Alex
-	make-move		- Alex
+	documentation		- Savoy	
+	makeMove		- Alex
 	generate successors	- Alex
 	
 
 Completed:
 
-	Output (Variable? Alex? What?)		-Alex
-	Create the move (returns list of table) - Alex
+	Output 			-Alex
+	validMove		- Alex
 
