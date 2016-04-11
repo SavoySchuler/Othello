@@ -81,12 +81,14 @@ Functions called:
 
 (defun deepenough (depth)
 	(if (eq 0 depth) 
-		(t)
-		(NIL)
+		t
+		nil
 	)
 )
 
 (defun static (position)
-
-
+	(cond  ((null position) nil)
+   	((equal b (car position))(+ 1 (static b (cdr position))))
+    	(t (static b(cdr position)))
+	)
 )
