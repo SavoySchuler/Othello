@@ -52,7 +52,7 @@
 
 ;Not finished functions swp
 ;color - other players color
-(defun GenerateSuccesors (oth color)
+(defun move-generator (oth color)
 	(let (pos left right up down leftUp rightUp leftDown rightDown endColor childern)
 		(if (eq color 'w)
 			(setf endColor 'b)
