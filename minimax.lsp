@@ -37,8 +37,8 @@ Functions called:
     ; if we have searched deep enough, or there are no successors,
     ; return position evaluation and nil for the path
     (if (or (deepenough depth) (null (move-generator position color)))
-        (list (aroundCornerHueristic position color) nil)				;hueristic calc
-;	(Print (cornerHueristic position color))
+        (list (aroundCornerHeuristic position color) nil)				;Heuristic calc
+;	(Print (cornerHeuristic position color))
 ;	(PrintOthello position)
 
         ; otherwise, generate successors and run minimax recursively
@@ -95,143 +95,15 @@ Functions called:
 	)
 )
 
-(defun static (position)
-	;(cond  ((null position) nil)
-   	;((equal 'b (car position))(+ 1 (static 'b (cdr position))))
-    	;(t (static 'b(cdr position)))
-	;)
 
-;	1
+(defun static (position color)
+	(let sum)
+	(setf sum 0)
+	(setf sum (+ sum (cornerHeuristic (position color))))
+	(setf sum (+ sum (aroundCornerHuersitic (position color))))
+
+	; more Heuristics
+
+	sum	
 )
 
-
-(defun aroundCornerHueristic (lst color)
-	(let (endColor sum)
-		(setf sum 0)
-		
-		(if (equal color 'w)
-			(setf enColor 'b)
-			(setf enColor 'w)
-		)
-		
-		;Check top left corner for each players piece
-		(when (eq(nth 0 lst) color)
-			(setf sum (+ sum 10))
-		)
-		
-		(when (eq(nth 0 lst) enColor)
-			(setf sum (- sum 10))
-		)
-
-		(when (eq(nth 7 lst) color)
-			(setf sum (+ sum 10))
-		)
-		
-		(when (eq(nth 7 lst) enColor)
-			(setf sum (- sum 10))
-		)
-		
-		(when (eq(nth 56 lst) color)
-			(setf sum (+ sum 10))
-		)
-		
-		(when (eq(nth 56 lst) enColor)
-			(setf sum (- sum 10))
-		)
-		
-		(when (eq(nth 63 lst) color)
-			(setf sum (+ sum 10))
-		)
-		
-		(when (eq(nth 63 lst) enColor)
-			(setf sum (- sum 10))
-		)
-		sum
-	)
-)
-
-(defun aroundCornerHueristic (lst color)
-	(let (endColor sum)
-		(setf sum 0)
-		
-		(if (eq color 'w)
-			(setf enColor 'b)
-			(setf enColor 'w)
-		)
-		
-		;Check top left corner for each players piece
-		(when (eq(nth 1 lst) color)
-			(setf sum (- sum 10))
-		)
-		
-		(when (eq(nth 1 lst) enColor)
-			(setf sum (+ sum 10))
-		)
-
-		(when (eq(nth 8 lst) color)
-			(setf sum (- sum 10))
-		)
-		
-		(when (eq(nth 8 lst) enColor)
-			(setf sum (+ sum 10))
-		)
-		
-		(when (eq(nth 9 lst) color)
-			(setf sum (- sum 10))
-		)
-		
-		(when (eq(nth 9 lst) enColor)
-			(setf sum (+ sum 10))
-		)
-		
-		(when (eq(nth 48 lst) color)
-			(setf sum (- sum 10))
-		)
-		
-		(when (eq(nth 48 lst) enColor)
-			(setf sum (+ sum 10))
-		)
-		
-		(when (eq(nth 49 lst) color)
-			(setf sum (- sum 10))
-		)
-		
-		(when (eq(nth 49 lst) enColor)
-			(setf sum (+ sum 10))
-		)
-		
-		(when (eq(nth 57 lst) color)
-			(setf sum (- sum 10))
-		)
-		
-		(when (eq(nth 57 lst) enColor)
-			(setf sum (+ sum 10))
-		)
-		
-		(when (eq(nth 55 lst) color)
-			(setf sum (- sum 10))
-		)
-		
-		(when (eq(nth 55 lst) enColor)
-			(setf sum (+ sum 10))
-		)
-		
-		(when (eq(nth 54 lst) color)
-			(setf sum (- sum 10))
-		)
-		
-		(when (eq(nth 54 lst) enColor)
-			(setf sum (+ sum 10))
-		)
-		
-		(when (eq(nth 62 lst) color)
-			(setf sum (- sum 10))
-		)
-		
-		(when (eq(nth 62 lst) enColor)
-			(setf sum (+ sum 10))
-		)
-		
-		(setf sum (+ sum 23))
-	)
-)
