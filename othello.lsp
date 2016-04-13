@@ -2,6 +2,7 @@
 (load (merge-pathnames "othello-init.lsp" *load-truename*))
 (load (merge-pathnames "minimax.lsp" *load-truename*))
 (load (merge-pathnames "move-generator.lsp" *load-truename*))
+(load (merge-pathnames "heuristics.lsp" *load-truename*))
 
 (defun othello (args)
 	(input args)

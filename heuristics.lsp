@@ -127,7 +127,7 @@
 			(setf sum (+ sum 50))
 		)
 		
-		(setf sum (+ sum 23))						;Why do we add 23 here??
+	sum
 	)
 )
 

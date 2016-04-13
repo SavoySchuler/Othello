@@ -37,8 +37,8 @@ Functions called:
     ; if we have searched deep enough, or there are no successors,
     ; return position evaluation and nil for the path
     (if (or (deepenough depth) (null (move-generator position color)))
-        (list (aroundCornerHeuristic position color) nil)				;Heuristic calc
-;	(Print (cornerHeuristic position color))
+        (list (static position color) nil)				;Heuristic calc
+;	(Print (static position color))
 ;	(PrintOthello position)
 
         ; otherwise, generate successors and run minimax recursively
@@ -97,7 +97,7 @@ Functions called:
 
 
 (defun static (position color)
-	(let sum)
+	(let (sum)
 	(setf sum 0)
 	(setf sum (+ sum (cornerHeuristic (position color))))
 	(setf sum (+ sum (aroundCornerHuersitic (position color))))
@@ -105,5 +105,6 @@ Functions called:
 	; more Heuristics
 
 	sum	
+	)
 )
 
