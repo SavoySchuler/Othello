@@ -133,8 +133,8 @@
 
 
 
-#|
-(defun static (position)
+
+(defun morePlayerCount (position color)
 	(let (endColor sum)
 		(setf sum 0)
 		
@@ -143,13 +143,43 @@
 			(setf enColor 'w)
 		)	
 
-	;(cond  ((null position) nil)
-   	;((equal 'b (car position))(+ 1 (static 'b (cdr position))))
-    	;(t (static 'b(cdr position)))
-	;)
 
-;	1
+	(cond  
+	 	(when (eq (color (car position))) 
+			(+ sum 1)
+		)
+	
+		(when (eq (enColor (car position))) 
+			(- sum 1)
+		)
+	)
+
+	
+	)
 )
-|#
 
+
+(defun moreOpponentCount (position color)
+	(let (endColor sum)
+		(setf sum 0)
+		
+		(if (equal color 'w)
+			(setf enColor 'b)
+			(setf enColor 'w)
+		)	
+
+
+	(cond  
+	 	(when (eq (color (car position))) 
+			(- sum 1)
+		)
+	
+		(when (eq (enColor (car position))) 
+			(+ sum 1)
+		)
+	)
+
+	
+	)
+)
 
