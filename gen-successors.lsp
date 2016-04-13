@@ -54,7 +54,7 @@
 ;color - other players color
 (defun move-generator (oth color)
 	(let (pos left right up down leftUp rightUp leftDown rightDown endColor childern)
-		(if (eq color 'w)
+		(if (equal color 'w)
 			(setf endColor 'b)
 			(setf endColor 'w)
 		)
@@ -64,7 +64,7 @@
 		(setf pos (AllPositions endColor oth))
 	
 		(dolist (indexX pos)
-		(print indexX)
+		
 		;Determine if the left sucessor can be generated
 		(when (and (> (mod indexX 8) 0)
 			 (not (eq indexX 0) ))
@@ -75,7 +75,7 @@
 			
 		)
 
-		(print "left")
+		
 		;Determine if the right sucessor can be generated
 		(when (< (mod indexX 8) (- 8 1))
 		
@@ -85,7 +85,7 @@
 		
 		)
 
-		(print "right")
+		
 		;Determine if the up sucessor can be generated 
 		(when (>= (/ indexX (float 8)) 1)
 		
@@ -95,7 +95,7 @@
 				
 		)
 
-		(print "up")
+		
 		;Determine if the down sucessor can be generated
 		(when (< (/ indexX (float 8)) (- 8 1))
 		
@@ -104,7 +104,7 @@
 			)
 		)
 		
-		(print "down")
+		
 		;Determine if the up left sucessor can be generated
 		(when (and (and (> (mod indexX 8) 0)
 			(not (eq indexX 0) )) (>= (/ indexX (float 8)) 1))
@@ -114,7 +114,7 @@
 			)
 		)
 
-		(print "up left")
+		
 		;Determine if the up right sucessor can be generated
 		(when (and (< (mod indexX 8) (- 8 1)) (>= (/ indexX (float 8)) 1))
 			
@@ -124,19 +124,18 @@
 
 		)
 		
-		(print "up right")
+		
 		;Determine if the down left sucessor can be generated
 		(when (and (and (> (mod indexX 8) 0)
 			(not (eq indexX 0) )) (< (/ indexX (float 8)) (- 8 1)))
-			(print "buttz")
-			(print indexX)
+			
 			(when (eq (nth (+ indexX 7) oth)'-)
 				(setf leftDown(CheckAllMoves oth (+ indexX 7) color))
 			)
 
 		)
 		
-		(print "down left")
+		
 		;Determine if the down right sucessor can be generated
 		(when (and (< (mod indexX 8) (+ 8 1)) (< (/ indexX (float 8)) (- 8 1)))
 			
@@ -145,7 +144,7 @@
 			)
 		)
 		
-		(print "down right")
+		
 		(setf childern (append childern (list left right up down leftUp rightUp leftDown rightDown)))
 		
 		)
@@ -162,9 +161,10 @@
 		(setf childern(remove-duplicates childern :test #'equal))
 		
 		(print "")
-		(print "")
-		(print "")
+		(print endColor)
+		(print "Turn")
 		(print "Printing Othello")
+		(PrintOthello oth)
 		(dolist (indexX childern)
 			(PrintOthello indexX)
 		)
@@ -196,7 +196,7 @@
 		;(setf pos (AllPositions color oth))
 		(setf indexX pos)
 		
-		(print "1")
+
 		;Determine if the left sucessor can be generated
 		(when (and (> (mod indexX 8) 0)
 			 (not (eq indexX 0) ))
@@ -208,12 +208,12 @@
 		(when (< (mod indexX 8) (- 8 1))
 			(setf right (CheckMoveR oth indexX endColor ))
 		)
-		(print "This is the problem")
+
 		;Determine if the up sucessor can be generated 
 		(when (>= (/ indexX (float 8)) 1)		
 			(setf up (CheckMoveU oth indexX endColor ))
 		)
-		(print "Yup")
+		
 		;Determine if the down sucessor can be generated
 		(when (< (/ indexX (float 8)) (- 8 1))
 			(setf down (CheckMoveD oth indexX endColor))
@@ -224,25 +224,25 @@
 			(not (eq indexX 0) )) (>= (/ indexX (float 8)) 1))			 
 			(setf leftUp (CheckMoveUL oth indexX endColor))
 		)
-		(print "2")
+		
 		;Determine if the up right sucessor can be generated
 		(when (and (< (mod indexX 8) (- 8 1)) (>= (/ indexX (float 8)) 1))			
 			(setf rightUp (CheckMoveUR oth indexX endColor))
 		)
-		(print "3")
+
 		;Determine if the down left sucessor can be generated
 		(when (and (and (> (mod indexX 8) 0)
 			 (not (eq indexX 0) )) (< (/ indexX (float 8)) (- 8 1)))	 
 			(setf leftDown (CheckMoveDL oth indexX endColor))
 		)
-		(print "4")
+
 		;Determine if the down right sucessor can be generated
 		(when (and (< (mod indexX 8) (- 8 1)) (< (/ indexX (float 8)) (- 8 1)))
 			
 			(setf rightDown(CheckMoveDR oth indexX endColor))
 			
 		)
-		(print "5")
+
 		(setf endPos (list left right up down leftUp rightUp leftDown rightDown))
 		
 		
@@ -257,7 +257,7 @@
 ;		(Print rightUp)
 ;		(Print leftDown)
 ;		(Print rightDown)
-		(CreateMove oth pos endPos)
+		(CreateMove oth pos endPos endColor)
 	)
 )
 
@@ -386,8 +386,7 @@
 			(when(and (equal indexX (+ pos 9))(equal (nth indexX oth) color))
 				(setf endPos nil)
 			)
-			
-			(print "UGH")
+		
 		)
 				
 	)
@@ -517,10 +516,10 @@
 	endPos
 )
 
-(defun CreateMove (lst pos endPos)
-	(let (tempList offsets endColor valid)
+(defun CreateMove (lst pos endPos endColor)
+	(let (tempList offsets valid)
 		(setf valid nil)
-		(setf endColor 'b)
+;		(setf endColor 'b)
 		(setf tempList (copy-list lst))
 		
 		(setf offsets '(1 -1 8 -8 9 7 -7 -9))
@@ -542,11 +541,11 @@
 		
 		(setf (nth pos tempList) endColor)
 		
-		(PrintOthello tempList)
+;		(PrintOthello tempList)
 		
 		(when (null valid)
 			(setf tempList nil)
-			(print nil)
+;			(print nil)
 		)
 		tempList
 	)
@@ -558,7 +557,7 @@
 (dolist (indexX pos)
 	(let (pos left right up down leftUp rightUp leftDown rightDown endColor)
 	
-		(if (eq color 'w)
+		(if (equal color 'w)
 			(setf endColor 'b)
 			(setf endColor 'w)
 		)
@@ -570,25 +569,21 @@
 			 
 			(setf endPos (CheckMove oth indexX endColor 1))
 			 
-			 (print "Left Step")
 			 
 			(setf left (CreateMove oth indexX -1 endPos endColor) )
 		)
 
-		(print "left")
 		;Determine if the right sucessor can be generated
 		(when (< (mod indexX 8) (- 8 1))
-			(print "Right crawl")
 			(CheckMove oth indexX endColor '-1)
 		(if ( not(equal endPos nil)) )
-			(print "Right step")
+
 			
 			(if (not (equal endPos nil))
 				(setf right (CreateMove oth indexX 1 endPos endColor) )
 			)
 		)
 
-		(print "right")
 		;Determine if the up sucessor can be generated 
 		(when (>= (/ indexX (float 8)) 1)
 		
@@ -599,7 +594,6 @@
 			)
 		)
 
-		(print "up")
 		;Determine if the down sucessor can be generated
 		(when (< (/ indexX (float 8)) (- 8 1))
 		
@@ -610,7 +604,6 @@
 			)
 		)
 		
-		(print "down")
 		;Determine if the up left sucessor can be generated
 		(when (and (and (>= (mod indeX 8) 0)
 			(not (eq indxX 0) )) (>= (/ indexX (float 8)) 1))
@@ -622,7 +615,6 @@
 			)
 		)
 
-		(print "up left")
 		;Determine if the up right sucessor can be generated
 		(when (and (< (mod indexX 8) (- 8 1)) (>= (/ indexX (float 8)) 1))
 			
@@ -634,7 +626,6 @@
 
 		)
 		
-		(print "up right")
 		;Determine if the down left sucessor can be generated
 		(when (and (and (>= (mod indexX 8) 0)
 			 (not (eq indexX 0) )) (< (/ indexX (float 8)) (- 8 1)))
@@ -647,7 +638,6 @@
 
 		)
 
-		(print "down left")
 		;Determine if the down right sucessor can be generated
 		(when (and (< (mod indexX 8) (- 8 1)) (< (/ indexX (float 8)) (- 8 1)))
 			
@@ -658,7 +648,6 @@
 			)
 		)
 		
-		(print "down right")
 		
 		)
 		

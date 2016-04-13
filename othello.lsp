@@ -9,7 +9,15 @@
 )
 
 (defun test ()
-	(minimax *lst2* 2)
+;	(minimax *lst2* 2 *AIColor*)
+
+	(setf butt (minimax *lst2* 2 *AIColor*) )
 )
 
 (othello *args*)
+
+
+
+;know: (load 'othello)
+;know: (test)
+;know: (PrintOthello (nth 0 (nth 1 butt)))

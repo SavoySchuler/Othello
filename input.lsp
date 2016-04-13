@@ -1,4 +1,5 @@
 (defvar *player* NIL)
+(defvar *AIColor* NIL)
 
 (defun input(args)
 	(cond 
@@ -48,5 +49,12 @@
 			)				
 		)
 	)
+
+	(if (eq *player* 'w)
+		(setf *AIColor* 'b)
+		(setf *AIColor* 'w)
+	)
 )
+
+
 
