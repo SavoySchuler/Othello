@@ -162,12 +162,49 @@
 	(let (lst sum)
 		
 		(setf sum 0)
-		(setf lst (AllPositions position color))
+		(setf lst (AllPositions color position))
 		
 		(dolist (indexX lst)
 			(setf sum (+ sum (nth indexX *positionalStrat*)))
 		)
 		
 		sum
+	)
+)
+
+(defun betweenEdgePieces (color position)
+	(let (sum)
+	
+		(setf sum 0)
+
+		(setf sum (+ sum (isBetween color position *edgeTopRow* 1)))
+		(print sum)
+		(setf sum (+ sum (isBetween color position *edgeBottomRow* 1)))
+	
+		(setf sum(+ sum (isBetween color position *edgeRightColumn* 8)))
+		(setf sum(+ sum (isBetween color position *edgeLeftColumn* 8)))
+		
+		sum
+	)
+)
+
+(defun isBetween (color position side offset)
+	(let (enColor total)
+		(setf total 0)
+		
+		(if (equal color 'w)
+			(setf enColor 'b)
+			(setf enColor 'w)
+		)
+	
+		(dolist (indexX side)
+			(when (equal color (nth indexX position))
+				(when (and (equal enColor (nth (- indexX offset) position))
+						   (equal enColor (nth (+ indexX offset) position)))
+					(setf total (+ total 30))
+				)
+			)
+		)
+		total
 	)
 )
