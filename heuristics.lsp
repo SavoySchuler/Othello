@@ -144,8 +144,8 @@
 		)	
 
 
-	(cond  
-	 	(when (eq (color (car position))) 
+	(dolist (tilePiece position)  
+	 	(when (eq (color tilePiece)) 
 			(+ sum 1)
 		)
 	
@@ -153,10 +153,10 @@
 			(- sum 1)
 		)
 	)
-
 	
-	)
+	)	
 )
+
 
 
 (defun moreOpponentCount (position color)
@@ -169,8 +169,8 @@
 		)	
 
 
-	(cond  
-	 	(when (eq (color (car position))) 
+	(dolist (tilePiece position)  
+	 	(when (eq (color tilePiece)) 
 			(- sum 1)
 		)
 	
@@ -178,8 +178,7 @@
 			(+ sum 1)
 		)
 	)
-
 	
-	)
+	)	
 )
 

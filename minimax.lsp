@@ -101,6 +101,7 @@ Functions called:
 	(setf sum 0)
 	(setf sum (+ sum (cornerHeuristic (position color))))
 	(setf sum (+ sum (aroundCornerHuersitic (position color))))
+	(setf sum (+ sum (morePlayerCount (position color))))
 
 	; more Heuristics
 
