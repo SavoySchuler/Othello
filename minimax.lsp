@@ -99,9 +99,9 @@ Functions called:
 (defun static (position color)
 	(let (sum)
 	(setf sum 0)
-	(setf sum (+ sum (cornerHeuristic (position color))))
-	(setf sum (+ sum (aroundCornerHuersitic (position color))))
-	(setf sum (+ sum (morePlayerCount (position color))))
+	(setf sum (+ sum (cornerHeuristic position color)))
+	(setf sum (+ sum (aroundCornerHeuristic position color)))
+	(setf sum (+ sum (morePlayerCount position color)))
 
 	; more Heuristics
 

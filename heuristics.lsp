@@ -145,40 +145,15 @@
 
 
 	(dolist (tilePiece position)  
-	 	(when (eq (color tilePiece)) 
-			(+ sum 1)
-		)
-	
-		(when (eq (enColor (car position))) 
-			(- sum 1)
-		)
-	)
-	
-	)	
-)
-
-
-
-(defun moreOpponentCount (position color)
-	(let (endColor sum)
-		(setf sum 0)
 		
-		(if (equal color 'w)
-			(setf enColor 'b)
-			(setf enColor 'w)
-		)	
-
-
-	(dolist (tilePiece position)  
-	 	(when (eq (color tilePiece)) 
-			(- sum 1)
+	 	(when (equal color tilePiece) 
+			(setf sum (+ sum 1))
 		)
 	
-		(when (eq (enColor (car position))) 
-			(+ sum 1)
+		(when (equal enColor tilePiece)
+			(setf sum (- sum 1))
 		)
 	)
-	
+	sum
 	)	
 )
-
