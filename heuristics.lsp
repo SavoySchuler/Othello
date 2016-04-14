@@ -158,14 +158,14 @@
 	)	
 )
 
-(defun (position color)
+(defun posStart (color position)
 	(let (lst sum)
 		
 		(setf sum 0)
 		(setf lst (AllPositions position color))
 		
 		(dolist (indexX lst)
-			(setf sum (+ sum (nth indexX *positionalStrat)))
+			(setf sum (+ sum (nth indexX *positionalStrat*)))
 		)
 		
 		sum
