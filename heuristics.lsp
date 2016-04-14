@@ -157,3 +157,17 @@
 	sum
 	)	
 )
+
+(defun (position color)
+	(let (lst sum)
+		
+		(setf sum 0)
+		(setf lst (AllPositions position color))
+		
+		(dolist (indexX lst)
+			(setf sum (+ sum (nth indexX *positionalStrat)))
+		)
+		
+		sum
+	)
+)
