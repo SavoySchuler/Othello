@@ -552,9 +552,22 @@
 	)
 )
 
-#|
-(defun human-move ()
+(defun human-move (userMove)
+	(let (pos posX posY)
+	(print (car userMove))
+	(print (cdr userMove))
+	(setf posX (+ '(car userMove) 1))
+	(setf posY (+ '(cdr userMove) 1))
+	(setf pos (* posX posY))
 
+
+)
+)
+
+
+
+
+#|
 (dolist (indexX pos)
 	(let (pos left right up down leftUp rightUp leftDown rightDown endColor)
 	
