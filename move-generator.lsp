@@ -73,13 +73,13 @@
 ;Not finished functions swp
 ;color - other players color
 (defun move-generator (oth color)
-	(let (pos left right up down leftUp rightUp leftDown rightDown endColor childern)
+	(let (pos left right up down leftUp rightUp leftDown rightDown endColor children)
 		(if (equal color 'w)
 			(setf endColor 'b)
 			(setf endColor 'w)
 		)
 	
-		(setf childern nil)
+		(setf children nil)
 	
 		(setf pos (AllPositions endColor oth))
 	
@@ -165,7 +165,7 @@
 		)
 		
 		
-		(setf childern (append childern (list left right up down leftUp rightUp leftDown rightDown)))
+		(setf children (append children (list left right up down leftUp rightUp leftDown rightDown)))
 		
 		)
 		
@@ -177,19 +177,19 @@
 ;		(PrintOthello rightUp)
 ;		(PrintOthello leftDown)
 ;		(PrintOthello rightDown)
-		(setf childern(remove nil childern))
-		(setf childern(remove-duplicates childern :test #'equal))
+		(setf children(remove nil children))
+		(setf children(remove-duplicates children :test #'equal))
 		
-		(print "")
-		(print endColor)
-		(print "Turn")
-		(print "Printing Othello")
-		(PrintOthello oth)
-		(dolist (indexX childern)
-			(PrintOthello indexX)
-		)
+;		(print "")
+;		(print endColor)
+;		(print "Turn")
+;		(print "Printing Othello")
+;		(PrintOthello oth)
+;		(dolist (indexX children)
+;			(PrintOthello indexX)
+;		)
 		
-		childern
+		children
 
 	)
 )
