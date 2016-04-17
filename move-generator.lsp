@@ -11,10 +11,7 @@
 *****************************************************************************|#
 
 ;un comment ctrl+k+u
-
 ;Todo Special case for rows and columns for check move
-
-
 ;Program thinks that two pieces next to one another is a valid move
 
 
@@ -31,6 +28,28 @@
 ;ALL test
     (setf *lst2* '(- B - B - B - - - - W W W - - - B W W - W B - - - - W W W - - - - B - B W B B - - - W - - B - - - - - - - - - - - - - - - - - -)) 
 ;	(setf *lst2* '(- B W B W B - - - - W W W - - - B W W - W B - - - - W W W - - - - B - B W B B - - - W - - B - W - - - - - - - - - - - - - W B W))
+
+(defun human-move (userMove)
+	(let (pos posX posY)
+		;convert user input to board position	
+		;This step could be done in one line, but is broken apart for readability
+		(setf posX (- (car userMove) 1))
+		(setf posY (* (- (cadr userMove) 1) 8))
+		(setf pos (+ posX posY))
+
+	
+		;check for legality
+		
+		;place move in board 
+		(setf (nth pos *board*) *player*)
+		
+		;(CreateMove *board* pos pos *player*)
+		;CreateMove (lst pos endPos endColor)
+		;(PrintOthello *board*)
+
+	)
+)
+
 	
 (defun PrintOthello (oth)
 ;	(setf *lst2* oth)
@@ -552,17 +571,7 @@
 	)
 )
 
-(defun human-move (userMove)
-	(let (pos posX posY)
-	
-	;This step could be done in one line, but is broken apart for readability
-	(setf posX (+ (car userMove) 1))
-	(setf posY (+ (cadr userMove) 1))
-	(setf pos (* posX posY))
 
-
-)
-)
 
 
 

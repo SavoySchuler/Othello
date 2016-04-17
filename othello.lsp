@@ -4,7 +4,10 @@
 (load (merge-pathnames "move-generator.lsp" *load-truename*))
 (load (merge-pathnames "heuristics.lsp" *load-truename*))
 
+(defvar *player* NIL)
+(defvar *AIColor* NIL)
 (defvar *positionalStrat* '(99 -8 8 6 6 8 -8 99 -8 -24 -4 -3 -3 -4 -24 -8 8 -4 7 4 4 7 -4 8 6 -3 4 0 0 4 -3 6 6 -3 4 0 0 4 -3 6 8 -4 7 4 4 7 -4 8 -8 -24 -4 -3 -3 -4 -24 -8 99 -8 8 6 6 8 -8 99))
+
 
 (setf *board* '(
 	- - - - - - - - 
@@ -23,10 +26,8 @@
 (defvar *edgeBottomRow*   '(57 58 59 60 61 62 ))
 (defvar *edgeRightColumn*  '(55 47 39 31 23 15))
 
+
 (defun othello (args)
-
-
-
 	(input args)
 	(if
 		(eq *player* 'b)
@@ -43,10 +44,10 @@
 		(do ( ( i 0 (1+ i) ) )
 			(( >= i 10) ‘done)  							;termination test
 			(PrintOthello *board*)		
-			(format t "~%Please enter the coordinates of your move as (x, y):")
+			(format t "~%Please enter the coordinates of your move as (x y):")
 			(setf userMove (read))
 			(human-move userMove)	
-			(move-generator 'w)
+			(move-generator *board* 'w)
 		)	
 	)
 )
@@ -57,8 +58,8 @@
 		(do ( ( i 0 (1+ i) ) )
 			(( >= i 10) ‘done)  							;termination test
 			(PrintOthello *board*)			
-			(move-generator 'b)
-			(format t "~%Please enter the coordinates of your move as (x, y):")
+			(move-generator *board* 'b)
+			(format t "~%Please enter the coordinates of your move as (x y):")
 			(setf userMove (read))
 			(human-move userMove)	
 		)

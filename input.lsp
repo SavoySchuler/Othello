@@ -1,6 +1,3 @@
-(defvar *player* NIL)
-(defvar *AIColor* NIL)
-
 (defun input(args)
 	(cond 
 		((= (length args) 1)  	
@@ -55,6 +52,3 @@
 		(setf *AIColor* 'w)
 	)
 )
-
-
-
