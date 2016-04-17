@@ -33,66 +33,113 @@
 		(playerFirst)
 		(opponentFirst)
 	)	
-		
+	score
 	endgame
 )
 
 
 (defun playerFirst ()
-	(let (userMove)	
-
-	(Setf I 0)	
-	(do ( ( i 0 (1+ i) ) )
-
-		(( >= i 10) ‘done)  							;termination test
-		(format t "Please enter the row, column coordinates of your move:")
-		(setf userMove (read))
-		(human-move userMove)	
-		(move-generator 'w)
+	(let (userMove)		
+		(do ( ( i 0 (1+ i) ) )
+			(( >= i 10) ‘done)  							;termination test
+			(PrintOthello *board*)		
+			(format t "~%Please enter the coordinates of your move as (x, y):")
+			(setf userMove (read))
+			(human-move userMove)	
+			(move-generator 'w)
+		)	
 	)
-))
+)
 
 
 (defun opponentFirst ()
 	(let (userMove)	
-	
-	(setf I 0)
-	(do ( ( i 0 (1+ i) ) )
-       	
-		(( >= i 10) ‘done)  							;termination test
-		(move-generator 'b)
-		(format t "Please enter the row, column coordinates of your move:")
-		(setf userMove (read))
-		(human-move userMove)	
-
+		(do ( ( i 0 (1+ i) ) )
+			(( >= i 10) ‘done)  							;termination test
+			(PrintOthello *board*)			
+			(move-generator 'b)
+			(format t "~%Please enter the coordinates of your move as (x, y):")
+			(setf userMove (read))
+			(human-move userMove)	
+		)
 	)
 )
+
+
+(defun score ()
+	(let (playAgain enColor sumB sumW)
+	(setf sum 0)	
+
+	(dolist (tilePiece *board*)  
+		
+	 	(when (equal tilePiece 'b) 
+			(setf sum (+ sumB 1))
+		)
+	
+		(when (equal tilePiece 'w)
+			(setf sum (+ sumW 1))
+		)
+	)
+
+	(cond
+		(when (eq sumB sumA)
+			(format t "You tie! The score is ~a ~a" sumB sumA)
+		)
+
+		(when (eq *player* 'b)
+			(cond			
+				(when (> sumB sumW)
+					(format t "You win! The score is ~a ~a" sumB sumA)
+				)
+
+				(when (< sumB sumW)
+					(format t "You lose! The score is ~a ~a" sumB sumA)
+				)
+			)
+		)
+
+		(when (eq *player* 'w)
+			(cond			
+				(when (< sumB sumW)
+					(format t "You win! The score is ~a ~a" sumA sumB)
+				)
+
+				(when (> sumB sumW)
+					(format t "You lose! The score is ~a ~a" sumA sumB)
+				)
+			)
+		)
+	)
+	)
 )
 
 
-(defun endgame ()
-	(let (playAgain)
-	(format t "Score: ")
-	
-
-	(format t "Would you like to move first [y/n]? ") 
+(defun endgame ()	
+	(format t "Would you like to play again (y/n)?") 
 	(setf playAgain (read))
 	
-	(when (equalp 'y playAgain)
-		(setf playAgain 'y)
-	)
+	(cond 
+		(when (equalp 'y playAgain)
+			(setf *board* '(
+			- - - - - - - - 
+			- - - - - - - - 
+			- - - - - - - - 
+			- - - W B - - - 
+			- - - B W - - - 
+			- - - - - - - - 
+			- - - - - - - - 
+			- - - - - - - -))	
+			(othello)
+		)
 			
-	(when (equalp 'n playAgain)
-		(setf playAgain 'n)
+		(when (equalp 'n playAgain)
+			(quit)
+		)
 	)
-					
-	(when (null *player*) 
-		(print "Please enter 'y' or 'n'.")
-		(endgame board)
-	)
-							
-	)				
-)
+
+	endgame						
+)				
+
 
 
 (defun test ()

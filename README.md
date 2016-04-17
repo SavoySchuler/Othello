@@ -8,16 +8,19 @@ To do:
 	othello-init		- ?
 	
 
-Savoy: 	Player vs. AI function	- started
-	Play for More/Less
-	End Game 		- started
-	Doc Formatting
+Savoy: 	player-move		- Savoy
+	Doc Formatting		- Savoy 
 
 Completed:
-	Main			- Savoy	
+	Play for More/Less	- Savoy
+	othello			- Savoy	
 	Minimax			- Savoy
 	Heuristics		- Savoy	
-	Input (not documented)	- Savoy
+	playerFirst		- Savoy
+	opponentFirst		- Savoy	
+	score			- Savoy
+	endgame			- Savoy
+	input 			- Savoy
 	generate successors	- Alex
 	Output 			- Alex
 	validMove		- Alex

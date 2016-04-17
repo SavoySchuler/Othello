@@ -554,10 +554,10 @@
 
 (defun human-move (userMove)
 	(let (pos posX posY)
-	(print (car userMove))
-	(print (cdr userMove))
-	(setf posX (+ '(car userMove) 1))
-	(setf posY (+ '(cdr userMove) 1))
+	
+	;This step could be done in one line, but is broken apart for readability
+	(setf posX (+ (car userMove) 1))
+	(setf posY (+ (cadr userMove) 1))
 	(setf pos (* posX posY))
 
 
@@ -581,9 +581,7 @@
 			 
 			;Insert Do that will check left
 			 
-			(setf endPos (CheckMove oth indexX endColor 1))
-			 
-			 
+			(setf endPos (CheckMove oth indexX endColor 1))			 
 			(setf left (CreateMove oth indexX -1 endPos endColor) )
 		)
 
@@ -637,7 +635,6 @@
 			(if (not (equal endPos nil))
 			(setf rightUp (CreateMove oth indexX '-7 endPos endColor))
 			)
-
 		)
 		
 		;Determine if the down left sucessor can be generated
@@ -649,7 +646,6 @@
 			(if (not (equal endPos nil))
 			(setf leftDown (CreateMove oth indexX 7 endPos endColor) )
 			)
-
 		)
 
 		;Determine if the down right sucessor can be generated
@@ -661,12 +657,7 @@
 			(setf rightDown (Swp state pos 9 ))
 			)
 		)
-		
-		
 		)
-		
 	)
 )
-
-
 |#

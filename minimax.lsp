@@ -97,13 +97,26 @@ Functions called:
 
 
 (defun static (position color)
-	(let (sum)
+	(let (sum numBlanks)
 	(setf sum 0)
 	(setf sum (+ sum (cornerHeuristic position color)))
 	(setf sum (+ sum (aroundCornerHeuristic position color)))
-	(setf sum (+ sum (morePlayerCount position color)))
+	
+	
+	(setf numBlanks 0)	
 
-	; more Heuristics
+	;find out how many blank spaces remain
+	(dolist (tilePiece *board*)  
+	 	(when (equal tilePiece '-) 
+			(setf numBlanks (+ numBlanks 1))
+		)
+	)
+
+	;heuristic to play for less pieces early on, then reverse
+	(if (< sumBlanks 25)
+		(setf sum (+ sum (morePlayerCount position color)))
+		(setf sum (+ sum (moreOpponentCount position color)))
+	)
 
 	sum	
 	)

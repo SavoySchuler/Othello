@@ -1,5 +1,3 @@
-
-
 (defun cornerHeuristic (lst color)
 	(let (endColor sum)
 		(setf sum 0)
@@ -135,7 +133,7 @@
 
 
 (defun morePlayerCount (position color)
-	(let (endColor sum)
+	(let (enColor sum)
 		(setf sum 0)
 		
 		(if (equal color 'w)
@@ -152,6 +150,31 @@
 	
 		(when (equal enColor tilePiece)
 			(setf sum (- sum 1))
+		)
+	)
+	sum
+	)	
+)
+
+
+
+(defun moreOpponentCount (position color)
+	(let (enColor sum)
+		(setf sum 0)
+		
+		(if (equal color 'w)
+			(setf enColor 'b)
+			(setf enColor 'w)
+		)	
+
+	(dolist (tilePiece position)  
+		
+	 	(when (equal color tilePiece) 
+			(setf sum (- sum 1))
+		)
+	
+		(when (equal enColor tilePiece)
+			(setf sum (+ sum 1))
 		)
 	)
 	sum
