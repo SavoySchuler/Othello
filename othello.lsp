@@ -13,8 +13,64 @@
 
 (defun othello (args)
 	(input args)
-	;(print *player*)	;TESTING
+	(if 
+		(eq *player* 'w)
+		playerFirst
+	)
+		
+	endgame
 )
+
+
+(defun playerFirst
+	(let (temp)	
+	(do ( ( i 0 (1+ i) ) )
+
+		(( >= i 10) ‘done)  							;termination test
+		(format t "Please enter the row, column coordinates of your move:")
+		(setf temp (read))
+		(CreateMove (lst pos endPos endColor))
+		(move-generator 'w)
+	)
+))
+
+
+(defun opponentFirst
+	(let (temp)	
+	(do ( ( i 0 (1+ i) ) )
+       	
+		(( >= i 10) ‘done)  							;termination test
+		(move-generator 'b)
+		(format t "Please enter the row, column coordinates of your move:")
+		(setf temp (read))
+		(CreateMove (lst pos endPos endColor))
+
+	)
+))
+
+
+(defun endgame (board)
+	(let (temp)
+	(format t "Score: ")
+	(format t "Would you like to move first [y/n]? ") 
+	(setf temp (read))
+	
+	(when (equalp 'y temp)
+		(setf temp 'y)
+	)
+			
+	(when (equalp 'n temp)
+		(setf temp 'n)
+	)
+					
+	(when (null *player*) 
+		(print "Please enter 'y' or 'n'.")
+		(endgame board)
+	)
+							
+	)				
+)
+
 
 (defun test ()
 ;	(minimax *lst2* 2 *AIColor*)

@@ -4,17 +4,21 @@ CSC447 Artificial Intelligence - Project 3
 Partners: Savoy Schuler, Alex Nienhueser
 
 To do:
-	Main			- Savoy	
-	Minimax			- Savoy
-	Heuristics		- Savoy
-	documentation		- Savoy	
-	makeMove		- Alex
+		
 	othello-init		- ?
 	
 
+Savoy: 	Player vs. AI function
+	Play for More/Less
+	End Game 
+	Doc Formatting
+
 Completed:
+	Main			- Savoy	
+	Minimax			- Savoy
+	Heuristics		- Savoy	
 	Input (not documented)	- Savoy
 	generate successors	- Alex
-	Output 			-Alex
+	Output 			- Alex
 	validMove		- Alex
-
+	makeMove		- Alex
