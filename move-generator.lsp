@@ -29,6 +29,23 @@
     (setf *lst2* '(- B - B - B - - - - W W W - - - B W W - W B - - - - W W W - - - - B - B W B B - - - W - - B - - - - - - - - - - - - - - - - - -)) 
 ;	(setf *lst2* '(- B W B W B - - - - W W W - - - B W W - W B - - - - W W W - - - - B - B W B B - - - W - - B - W - - - - - - - - - - - - - W B W))
 
+
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
+
 (defun human-move (userMove)
 	(let (pos posX posY)
 		;convert user input to board position	
@@ -50,6 +67,22 @@
 	)
 )
 
+
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
 	
 (defun PrintOthello (oth)
 ;	(setf *lst2* oth)
@@ -69,6 +102,22 @@
 
 )
 
+
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
 
 ;Not finished functions swp
 ;color - other players color
@@ -195,6 +244,21 @@
 )
 
 
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
 
 (defun AllPositions (color oth)
   (loop
@@ -205,6 +269,22 @@
 
 )
 
+
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
 
 (defun CheckAllMoves (oth pos endColor)
 (let (indexX lst left right up down leftUp rightUp leftDown rightDown)
@@ -281,7 +361,21 @@
 	)
 )
 
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
 
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
 
 (defun CheckMoveUL (oth pos color)
 	(let (row)
@@ -316,6 +410,22 @@
 	endPos
 )
 
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
+
 (defun CheckMoveUR (oth pos color)
 	(let (row)
 	
@@ -346,6 +456,22 @@
 	)
 	endPos
 )
+
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
 
 (defun CheckMoveDL (oth pos color)
 	(let (row)
@@ -380,6 +506,23 @@
 	endPos
 )
 
+
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
+
 (defun CheckMoveDR (oth pos color)
 	(let (row)
 	
@@ -413,6 +556,23 @@
 	endPos
 )
 
+
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
+
 (defun CheckMoveD (oth pos color)
 	(let (row)
 	
@@ -443,6 +603,22 @@
 	endPos
 )
 
+
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
 
 (defun CheckMoveU (oth pos color)
 	(let (row)
@@ -475,6 +651,22 @@
 )
 
 
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
+
 (defun CheckMoveR (oth pos color)
 	(let (row)
 	
@@ -506,6 +698,23 @@
 	endPos
 )
 
+
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
+
 (defun CheckMoveL (oth pos color)
 	(let (row)
 	
@@ -535,6 +744,23 @@
 	)
 	endPos
 )
+
+
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
 
 (defun CreateMove (lst pos endPos endColor)
 	(let (tempList offsets valid)

@@ -1,3 +1,28 @@
+#|********************************* othello.lsp *******************************
+	Program 3 - Othello Player vs. Artificial Intelligence Game
+
+	Authors: Savoy Schuler, Alex Nienheuser
+
+	Date: April 18, 2016
+
+	Professor: Dr. John Weiss
+
+	Course: CSC 447 - M001
+
+	Usage Instructions: clisp othello <optional player color: B, W, Black, or White>
+
+	Example Program Call:	clisp othello b
+
+	Bugs: 
+	
+	Todo: 
+
+	Program Details:
+
+
+
+*****************************************************************************|#
+
 (load (merge-pathnames "input.lsp" *load-truename*))
 (load (merge-pathnames "othello-init.lsp" *load-truename*))
 (load (merge-pathnames "minimax.lsp" *load-truename*))
@@ -6,10 +31,12 @@
 
 (defvar *player* NIL)
 (defvar *AIColor* NIL)
+(defvar *edgeTopRow*      '(1 2 3 4 5 6 ))
+(defvar *edgeLeftColumn* '(8 16 24 32 40 48 ))
+(defvar *edgeBottomRow*   '(57 58 59 60 61 62 ))
+(defvar *edgeRightColumn*  '(55 47 39 31 23 15))
 (defvar *positionalStrat* '(99 -8 8 6 6 8 -8 99 -8 -24 -4 -3 -3 -4 -24 -8 8 -4 7 4 4 7 -4 8 6 -3 4 0 0 4 -3 6 6 -3 4 0 0 4 -3 6 8 -4 7 4 4 7 -4 8 -8 -24 -4 -3 -3 -4 -24 -8 99 -8 8 6 6 8 -8 99))
-
-
-(setf *board* '(
+(defvar *board* '(
 	- - - - - - - - 
 	- - - - - - - - 
 	- - - - - - - - 
@@ -21,11 +48,22 @@
 ) )
 
 
-(defvar *edgeTopRow*      '(1 2 3 4 5 6 ))
-(defvar *edgeLeftColumn* '(8 16 24 32 40 48 ))
-(defvar *edgeBottomRow*   '(57 58 59 60 61 62 ))
-(defvar *edgeRightColumn*  '(55 47 39 31 23 15))
 
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
 
 (defun othello (args)
 	(input args)
@@ -38,6 +76,22 @@
 	endgame
 )
 
+
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
 
 (defun playerFirst ()
 	(let (userMove)		
@@ -53,6 +107,22 @@
 )
 
 
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
+
 (defun opponentFirst ()
 	(let (userMove)	
 		(do ( ( i 0 (1+ i) ) )
@@ -66,6 +136,22 @@
 	)
 )
 
+
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
 
 (defun score ()
 	(let (playAgain enColor sumB sumW)
@@ -115,6 +201,22 @@
 )
 
 
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
+
 (defun endgame ()	
 	(format t "Would you like to play again (y/n)?") 
 	(setf playAgain (read))
@@ -150,7 +252,6 @@
 )
 
 (othello *args*)
-
 
 
 ;know: (load 'othello)

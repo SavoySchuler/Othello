@@ -1,3 +1,19 @@
+
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
 (defun cornerHeuristic (lst color)
 	(let (endColor sum)
 		(setf sum 0)
@@ -42,6 +58,23 @@
 		sum
 	)
 )
+
+
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
 
 (defun aroundCornerHeuristic (lst color)
 	(let (endColor sum)
@@ -130,7 +163,21 @@
 )
 
 
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
 
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
 
 (defun morePlayerCount (position color)
 	(let (enColor sum)
@@ -157,6 +204,21 @@
 )
 
 
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
 
 (defun moreOpponentCount (position color)
 	(let (enColor sum)
@@ -181,6 +243,23 @@
 	)	
 )
 
+
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
+
 (defun posStart (color position)
 	(let (lst sum)
 		
@@ -194,6 +273,23 @@
 		sum
 	)
 )
+
+
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
 
 (defun betweenEdgePieces (color position)
 	(let (sum)
@@ -210,6 +306,23 @@
 		sum
 	)
 )
+
+
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
 
 (defun isBetween (color position side offset)
 	(let (enColor total)

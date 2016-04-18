@@ -1,3 +1,20 @@
+
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
+
 (defun input(args)
 	(cond 
 		((= (length args) 1)  	

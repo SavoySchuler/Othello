@@ -28,11 +28,10 @@ Functions called:
               applies the static evaluation function to the position.
 
           Note: these functions may need additional arguments.
+
 |#
 
 (defun minimax (position depth color)
-
-	
 
     ; if we have searched deep enough, or there are no successors,
     ; return position evaluation and nil for the path
@@ -88,6 +87,23 @@ Functions called:
     )
 )
 
+
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
+
 (defun deepenough (depth)
 	(if (eq 0 depth) 
 		t
@@ -95,6 +111,22 @@ Functions called:
 	)
 )
 
+
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Parameters: 
+
+
+Returns:
+
+
+*****************************************************************************|#
 
 (defun static (position color)
 	(let (sum numBlanks)
