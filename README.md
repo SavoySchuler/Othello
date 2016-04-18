@@ -3,11 +3,9 @@ CSC447 Artificial Intelligence - Project 3
 
 Partners: Savoy Schuler, Alex Nienhueser
 
-To do:	get game to play in turns	
-	alpha-beta pruning
-	documentation/naming	
-	othello-init?
-	
+To do:	terminate game		- 
+	alpha-beta pruning	- 
+	documentation/naming	- Savoy
 
 Done
 

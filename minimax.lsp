@@ -31,7 +31,7 @@ Functions called:
 
 |#
 
-(defun minimax (position depth color)
+(defun minimax (position depth color)  ;alpha beta
 
     ; if we have searched deep enough, or there are no successors,
     ; return position evaluation and nil for the path
@@ -131,6 +131,7 @@ Returns:
 (defun static (position color)
 	(let (sum numBlanks)
 	(setf sum 0)
+	(setf sumBlanks 0)
 	(setf sum (+ sum (cornerHeuristic position color)))
 	(setf sum (+ sum (aroundCornerHeuristic position color)))
 	

@@ -67,6 +67,7 @@ Returns:
 
 (defun othello (args)
 	(input args)
+	(format t "Welcome to Othello. Let the match begin!~%")
 	(if
 		(eq *player* 'b)
 		(playerFirst)
@@ -96,16 +97,19 @@ Returns:
 (defun playerFirst ()
 	(let (userMove)		
 		(do ( ( i 0 (1+ i) ) )
-			(( >= i 10) ‘done)  							;termination test
+			(( >= i 10) ‘done)  ;termination test
 			(PrintOthello *board*)		
 			(format t "~%Please enter the coordinates of your move as (x y):")
 			(setf userMove (read))
-			(human-move userMove)	
-			(move-generator *board* 'w)
-		)	
+			(human-move userMove)
+;AI Move			
+			(setf lst (minimax *board* 2 *AIColor*))			
+			(when (not (null lst))
+				(setf *board* (nth 0 (nth 1 lst)))
+			)	
+		)
 	)
 )
-
 
 #|*****************************************************************************  
 Author: Alex Nienheuser, Savoy Schuler
@@ -124,11 +128,15 @@ Returns:
 *****************************************************************************|#
 
 (defun opponentFirst ()
-	(let (userMove)	
+	(let (userMove lst)	
 		(do ( ( i 0 (1+ i) ) )
 			(( >= i 10) ‘done)  							;termination test
-			(PrintOthello *board*)			
-			(move-generator *board* 'b)
+			
+			(setf lst (minimax *board* 2 *AIColor*))			
+			(when (not (null lst))
+			(setf *board* (nth 0 (nth 1 lst)))
+)
+			(PrintOthello *board*)
 			(format t "~%Please enter the coordinates of your move as (x y):")
 			(setf userMove (read))
 			(human-move userMove)	

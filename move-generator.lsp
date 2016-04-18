@@ -47,7 +47,7 @@ Returns:
 *****************************************************************************|#
 
 (defun human-move (userMove)
-	(let (pos posX posY)
+	(let (pos posX posY lst)
 		;convert user input to board position	
 		;This step could be done in one line, but is broken apart for readability
 		(setf posX (- (car userMove) 1))
@@ -58,12 +58,16 @@ Returns:
 		;check for legality
 		
 		;place move in board 
-		(setf (nth pos *board*) *player*)
+		;(setf (nth pos *board*) *player*)
 		
-		;(CreateMove *board* pos pos *player*)
-		;CreateMove (lst pos endPos endColor)
-		;(PrintOthello *board*)
-
+		(setf lst (CheckAllMoves *board* pos *player*))
+		(cond 		
+		((null lst)
+			(format t "Invalid move, try again.")		
+		 	(playerFirst)
+		)		
+		(t (setf *board* lst))
+		)		
 	)
 )
 
