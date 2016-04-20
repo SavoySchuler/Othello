@@ -24,11 +24,10 @@ Functions called:
           (move-generator position) -
               generates successors to the position.
 
-          (static position) -
+          (static position color) -
               applies the static evaluation function to the position.
 
           Note: these functions may need additional arguments.
-
 |#
 
 (defun minimax (position depth color alpha beta isMaxLevel) 
@@ -61,94 +60,54 @@ Functions called:
             )
 
 
-;NODE STRUCT IF WE NEED IT
-;Make a do list to make list of all possible moves with parent and node and value
-;Node struct needed at least by here
-;			(dolist )
-;store score in succ-value
-;store path in succ-path
+            ; explore possible moves by looping through successor positions
+            (dolist (successor successors)
 
+                ; perform recursive DFS exploration of game tree
+                (cond	
+						((equal color 'w)
+							(setq succ-value (minimax successor (1- depth) 'b alpha beta nil))
 
-			
+						)
 
-		
-            ; explore possible moves by looping through successor positions:
+						((equal color 'b)
+							(setq succ-value (minimax successor (1- depth) 'w alpha beta nil))
+						)
 
-;FOR MAX:
-			(when (equal isMaxLevel t)
-				(setf best-score -100000000)
-				(dolist (successor successors)
-	
-					; perform recursive DFS exploration of game tree
-					(if (equal color 'w)
-						(setq succ-value (minimax successor (1- depth) 'b) alpha beta nil)
-						(setq succ-value (minimax successor (1- depth) 'w) alpha beta nil)
-					)
-		
-					(setf succ-value (car succ-value ) )			<score 
-					(setq succ-path (cons successor (cdr succ-value )) )			<- actually we need this to be parent?
-					(when (setf alpha (max succ-value alpha) ) )
-
-					(when (<= beta alpha)
-						(setf best-score alpha)
 					)
 
-;Dr. Weiss' orignal code for reference, should be removed:
-;-------------------------------------------------------------------------------
 
-					; change sign every ply to reflect alternating selection
-					; of MAX/MIN player (maximum/minimum value)
-					(setq succ-score (- (car succ-value)))
-	
-					; update best value and path if a better move is found
-					; (note that path is being stored in reverse order)
-					(when (> succ-score best-score)
-						(setq best-score succ-score)
-						(setq best-path (cons successor (cdr succ-value)))
-					)
-;------------------------------------------------------------------------------
-;Returning best path:				
-					(when (> alpha best-score)
-						(when (not (null succ-path) ) (setf best-path (node-parent succ-path) ) ) 
-						(setf best-score alpha)
-					)
-				)
+                ; change sign every ply to reflect alternating selection
+                ; of MAX/MIN player (maximum/minimum value)
+                (setq succ-score (- (car succ-value)))
+
+
+		(if (eq isMaxLevel t)
+			(if (> succ-score alpha)
+				(setf alpha succ-score)	
 			)
-
-;FOR MIN:
-		(when (null isMaxLevel)
-			(setf best-score 100000000)
-			(dolist (successor successors)
-
-				; perform recursive DFS exploration of game tree
-				(if (equal color 'w)
-					(setq succ-value (minimax successor (1- depth) 'b) alpha beta t)
-					(setq succ-value (minimax successor (1- depth) 'w) alpha beta t)
-				)		
-			
-				(setf succ-value (car succ-value ) )
-				(setq succ-path (cons successor (cdr succ-value )) )	
-				(when (setf beta (min succ-value beta) ) )
-
-
-				(when (<= beta alpha)
-					(setf best-score beta)
-				)
-
-				(when (< beta best-score)
-					(setf best-path successor)
-					(setf best-score beta)
-				)
-			)	
+			(if (< beta succ-score)
+				(setf beta succ-score)
+			)
 		)
+
+		(if (<= beta alpha)
+			(return)
+		)
+
+                ; update best value and path if a better move is found
+                ; (note that path is being stored in reverse order)
+                (when (> succ-score best-score)
+                      (setq best-score succ-score)
+                      (setq best-path (cons successor (cdr succ-value)))
+                )
+            )
+
             ; return (value path) list when done
             (list best-score best-path)
         )
     )
 )
-
-
-
 
 #|*****************************************************************************  
 Author: Alex Nienheuser, Savoy Schuler
@@ -194,9 +153,11 @@ Returns:
 	(let (sum numBlanks)
 	(setf sum 0)
 	(setf sumBlanks 0)
-	(setf sum (+ sum (cornerHeuristic position color)))
-	(setf sum (+ sum (aroundCornerHeuristic position color)))
-	
+	(setf sum (+ sum (posStrat position color)))
+	(setf sum (+ sum (isBetween color position *edgeTopRow* 1)))
+	(setf sum (+ sum (isBetween color position *edgeBottomRow* 1)))
+	(setf sum (+ sum (isBetween color position *edgeLeftColumn* 8)))
+	(setf sum (+ sum (isBetween color position *edgeRightColumn* 8)))
 	
 	(setf numBlanks 0)	
 

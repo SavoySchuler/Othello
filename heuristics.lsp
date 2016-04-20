@@ -260,7 +260,7 @@ Returns:
 
 *****************************************************************************|#
 
-(defun posStart (color position)
+(defun posStrat (position color)
 	(let (lst sum)
 		
 		(setf sum 0)

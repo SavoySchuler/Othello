@@ -103,7 +103,7 @@ Returns:
 			(setf userMove (read))
 			(human-move userMove)
 ;AI Move			
-			(setf lst (minimax *board* 2 *AIColor*))			
+			(setf lst (minimax *board* 2 *AIColor* -100000 100000 t))			
 			(when (not (null lst))
 				(setf *board* (nth 0 (nth 1 lst)))
 			)	
