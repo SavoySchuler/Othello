@@ -31,23 +31,25 @@ Functions called:
 
 |#
 
-(defun minimax (position depth color)  ;alpha beta
+(defun minimax (position depth color alpha beta isMaxLevel) 
 
     ; if we have searched deep enough, or there are no successors,
     ; return position evaluation and nil for the path
     (if (or (deepenough depth) (null (move-generator position color)))
-        (list (static position color) nil)				;Heuristic calc
-;	(Print (static position color))
-;	(PrintOthello position)
+        (list (static position color) nil) ;Heuristic calc
 
         ; otherwise, generate successors and run minimax recursively
-        (let
+        
+		;Local Variables:
+		(let
             (
                 ; generate list of sucessor positions
                 (successors (move-generator position color))
-		;(successors (GenerateSuccessors position))		;Name change
+		
+
+				;(successors (GenerateSuccessors position))		;Name change?	;Do we need this now?	
                 
-		; initialize current best path to nil
+				; initialize current best path to nil
                 (best-path nil)
 
                 ; initialize current best score to negative infinity
@@ -55,37 +57,97 @@ Functions called:
 
                 ; other local variables
                 succ-value
-                succ-score
-            )
-		
-            ; explore possible moves by looping through successor positions
-            (dolist (successor successors)
-		
-		
-                ; perform recursive DFS exploration of game tree
-		
-		(if (equal color 'w)
-			(setq succ-value (minimax successor (1- depth) 'b))
-			(setq succ-value (minimax successor (1- depth) 'w))
-		)
-		
-                ; change sign every ply to reflect alternating selection
-                ; of MAX/MIN player (maximum/minimum value)
-                (setq succ-score (- (car succ-value)))
-		
-                ; update best value and path if a better move is found
-                ; (note that path is being stored in reverse order)
-                (when (> succ-score best-score)
-                      (setq best-score succ-score)
-                      (setq best-path (cons successor (cdr succ-value)))
-                )
+                succ-path			
             )
 
+
+;NODE STRUCT IF WE NEED IT
+;Make a do list to make list of all possible moves with parent and node and value
+;Node struct needed at least by here
+;			(dolist )
+;store score in succ-value
+;store path in succ-path
+
+
+			
+
+		
+            ; explore possible moves by looping through successor positions:
+
+;FOR MAX:
+			(when (equal isMaxLevel t)
+				(setf best-score -100000000)
+				(dolist (successor successors)
+	
+					; perform recursive DFS exploration of game tree
+					(if (equal color 'w)
+						(setq succ-value (minimax successor (1- depth) 'b) alpha beta nil)
+						(setq succ-value (minimax successor (1- depth) 'w) alpha beta nil)
+					)
+		
+					(setf succ-value (car succ-value ) )			<score 
+					(setq succ-path (cons successor (cdr succ-value )) )			<- actually we need this to be parent?
+					(when (setf alpha (max succ-value alpha) ) )
+
+					(when (<= beta alpha)
+						(setf best-score alpha)
+					)
+
+;Dr. Weiss' orignal code for reference, should be removed:
+;-------------------------------------------------------------------------------
+
+					; change sign every ply to reflect alternating selection
+					; of MAX/MIN player (maximum/minimum value)
+					(setq succ-score (- (car succ-value)))
+	
+					; update best value and path if a better move is found
+					; (note that path is being stored in reverse order)
+					(when (> succ-score best-score)
+						(setq best-score succ-score)
+						(setq best-path (cons successor (cdr succ-value)))
+					)
+;------------------------------------------------------------------------------
+;Returning best path:				
+					(when (> alpha best-score)
+						(when (not (null succ-path) ) (setf best-path (node-parent succ-path) ) ) 
+						(setf best-score alpha)
+					)
+				)
+			)
+
+;FOR MIN:
+		(when (null isMaxLevel)
+			(setf best-score 100000000)
+			(dolist (successor successors)
+
+				; perform recursive DFS exploration of game tree
+				(if (equal color 'w)
+					(setq succ-value (minimax successor (1- depth) 'b) alpha beta t)
+					(setq succ-value (minimax successor (1- depth) 'w) alpha beta t)
+				)		
+			
+				(setf succ-value (car succ-value ) )
+				(setq succ-path (cons successor (cdr succ-value )) )	
+				(when (setf beta (min succ-value beta) ) )
+
+
+				(when (<= beta alpha)
+					(setf best-score beta)
+				)
+
+				(when (< beta best-score)
+					(setf best-path successor)
+					(setf best-score beta)
+				)
+			)	
+		)
             ; return (value path) list when done
             (list best-score best-path)
         )
     )
 )
+
+
 
 
 #|*****************************************************************************  
