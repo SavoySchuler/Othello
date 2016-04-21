@@ -50,8 +50,8 @@ Returns:
 	(let (pos posX posY lst)
 		;convert user input to board position	
 		;This step could be done in one line, but is broken apart for readability
-		(setf posX (- (car userMove) 1))
-		(setf posY (* (- (cadr userMove) 1) 8))
+		(setf posX (- (cadr userMove) 1))
+		(setf posY (* (- (car userMove) 1) 8))
 		(setf pos (+ posX posY))
 
 	

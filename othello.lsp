@@ -99,8 +99,9 @@ Returns:
 		(do ( ( i 0 (1+ i) ) )
 			(( >= i 10) ‘done)  ;termination test
 			(PrintOthello *board*)		
-			(format t "~%Please enter the coordinates of your move as (x y):")
-			(setf userMove (read))
+			(format t "~%What is your move [row col]?" )
+			(setf userMove (append userMove (list (read))))
+			(setf userMove (append userMove (list (read))))			
 			(human-move userMove)
 ;AI Move			
 			(setf lst (minimax *board* 2 *AIColor* -100000 100000 t))			
