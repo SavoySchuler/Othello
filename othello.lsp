@@ -99,7 +99,7 @@ Returns:
 		(do ( ( i 0 (1+ i) ) )
 			(( >= i 10) ‘done)  ;termination test
 			(PrintOthello *board*)		
-			(format t "~%What is your move [row col]?" )
+			(format t "~%What is your move [row col]? ")
 			(setf userMove (append userMove (list (read))))
 			(setf userMove (append userMove (list (read))))			
 			(human-move userMove)

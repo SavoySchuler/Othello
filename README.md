@@ -3,9 +3,10 @@ CSC447 Artificial Intelligence - Project 3
 
 Partners: Savoy Schuler, Alex Nienhueser
 
-To do:	terminate game		- 
-	alpha-beta pruning	- 
-	documentation/naming	- Savoy
+To do:	terminate game -alex
+		documentation/naming - savoy
+		test alpha-beta  
+
 
 Done
 
@@ -18,7 +19,7 @@ Savoy: 	human-move
 	input
 	morePlayerCount
 	moreOpponentCount
-	minimax
+	minimax (including alph-beta pruning)
 	deepenough
 	static
 	doc formatting
