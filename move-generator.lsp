@@ -791,8 +791,6 @@ Returns:
 		
 		(setf (nth pos tempList) endColor)
 		
-;		(PrintOthello tempList)
-		
 		(when (null valid)
 			(setf tempList nil)
 ;			(print nil)
@@ -802,101 +800,19 @@ Returns:
 )
 
 
-
-
-
-
-#|
-(dolist (indexX pos)
-	(let (pos left right up down leftUp rightUp leftDown rightDown endColor)
-	
-		(if (equal color 'w)
-			(setf endColor 'b)
-			(setf endColor 'w)
-		)
-		;Determine if the left sucessor can be generated
-		(when (and (>= (mod indexX 8) 0)
-			 (not (eq indexX 0) ))
-			 
-			;Insert Do that will check left
-			 
-			(setf endPos (CheckMove oth indexX endColor 1))			 
-			(setf left (CreateMove oth indexX -1 endPos endColor) )
-		)
-
-		;Determine if the right sucessor can be generated
-		(when (< (mod indexX 8) (- 8 1))
-			(CheckMove oth indexX endColor '-1)
-		(if ( not(equal endPos nil)) )
-
-			
-			(if (not (equal endPos nil))
-				(setf right (CreateMove oth indexX 1 endPos endColor) )
-			)
-		)
-
-		;Determine if the up sucessor can be generated 
-		(when (>= (/ indexX (float 8)) 1)
-		
-			(setf endPos(CheckMove oth indexX endColor '-8))
-			
-			(if (not (equal endPos nil))
-			(setf up (CreateMove oth indexX 8 endPos endColor) )
-			)
-		)
-
-		;Determine if the down sucessor can be generated
-		(when (< (/ indexX (float 8)) (- 8 1))
-		
-			(setf endPos (CheckMove oth indexX endColor 8))
-			(format t "endPos up: ~S" endPos)
-			(if (not (equal endPos nil))
-				(setf down (CreateMove oth indexX '-8 endPos endColor) )
-			)
-		)
-		
-		;Determine if the up left sucessor can be generated
-		(when (and (and (>= (mod indeX 8) 0)
-			(not (eq indxX 0) )) (>= (/ indexX (float 8)) 1))
-			 
-			(setf endPos (CheckMove oth indeX endColor 9))
-			
-			(if (not (equal endPos nil))
-			(setf leftUp (CreateMove oth indexX '-9 endPos endColor))
-			)
-		)
-
-		;Determine if the up right sucessor can be generated
-		(when (and (< (mod indexX 8) (- 8 1)) (>= (/ indexX (float 8)) 1))
-			
-			(setf endPos (CheckMove oth indexX endColor 7))
-			
-			(if (not (equal endPos nil))
-			(setf rightUp (CreateMove oth indexX '-7 endPos endColor))
-			)
-		)
-		
-		;Determine if the down left sucessor can be generated
-		(when (and (and (>= (mod indexX 8) 0)
-			 (not (eq indexX 0) )) (< (/ indexX (float 8)) (- 8 1)))
-			 
-			(setf endPos (CheckMove oth indexX endColor '-7))
-			
-			(if (not (equal endPos nil))
-			(setf leftDown (CreateMove oth indexX 7 endPos endColor) )
-			)
-		)
-
-		;Determine if the down right sucessor can be generated
-		(when (and (< (mod indexX 8) (- 8 1)) (< (/ indexX (float 8)) (- 8 1)))
-			
-			(CheckMove oth indexX endColor '-9)
-			
-			(if (not (equal endPos nil))
-			(setf rightDown (Swp state pos 9 ))
-			)
-		)
-		)
+(defun AINoMove ()
+	(if (null (move-generator *board* *AIColor*))
+		nil
+		t
 	)
+
 )
-|#
+
+(defun PlayerNoMove ()
+	(if (null (move-generator *board* *player*))
+		nil
+		t
+	)
+
+)
+
