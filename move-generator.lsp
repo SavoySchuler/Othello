@@ -47,12 +47,12 @@ Returns:
 *****************************************************************************|#
 
 (defun human-move (userMove)
-	(let (pos posX posY lst)
+	(let (pos posCol posRow lst)
 		;convert user input to board position	
 		;This step could be done in one line, but is broken apart for readability
-		(setf posX (- (cadr userMove) 1))
-		(setf posY (* (- (car userMove) 1) 8))
-		(setf pos (+ posX posY))
+		(setf posRow (* (- (car userMove) 1) 8))
+		(setf posCol (- (cadr userMove) 1))
+		(setf pos (+ posCol posRow))
 
 	
 		;check for legality
