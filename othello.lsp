@@ -97,16 +97,19 @@ Returns:
 (defun playerFirst ()
 	(let (userMove)		
 		(do ( ( i 0 (1+ i) ) )
-			(( >= i 10) ‘done)  ;termination test
+			(( >= i 8) ‘done)  ;termination test
 			(PrintOthello *board*)		
 			(format t "~%What is your move [row col]? ")
 			(setf userMove (append userMove (list (read))))
 			(setf userMove (append userMove (list (read))))			
 			(human-move userMove)
-;AI Move			
-			(setf lst (minimax *board* 2 *AIColor* -100000 100000 t))			
+;AI Move	
+			(print "ugh")	
+			(setf lst (minimax *board* 2 *AIColor* -100000 100000 t))
+			(print "failure")
 			(when (not (null lst))
 				(setf *board* (nth 0 (nth 1 lst)))
+				(print (nth 0 lst))
 			)	
 		)
 	)
@@ -253,12 +256,6 @@ Returns:
 )				
 
 
-
-(defun test ()
-;	(minimax *lst2* 2 *AIColor*)
-
-	(setf butt (minimax *lst2* 2 *AIColor*) )
-)
 
 (othello *args*)
 

@@ -53,7 +53,7 @@ Returns:
 		(setf posRow (* (- (car userMove) 1) 8))
 		(setf posCol (- (cadr userMove) 1))
 		(setf pos (+ posCol posRow))
-
+		(print pos)
 	
 		;check for legality
 		
@@ -61,6 +61,7 @@ Returns:
 		;(setf (nth pos *board*) *player*)
 		
 		(setf lst (CheckAllMoves *board* pos *player*))
+		(print "Success")
 		(cond 		
 		((null lst)
 			(format t "Invalid move, try again.")		
@@ -152,9 +153,18 @@ Returns:
 		;Determine if the right sucessor can be generated
 		(when (< (mod indexX 8) (- 8 1))
 		
+		(when (<= indexX 0)
+			(print "It's going to start working?")
+			(print indexX)
+		)
+		
 			(when (eq (nth (+ indexX 1) oth)'-)
 					(setf right(CheckAllMoves oth (+ indexX 1) color))
 			)
+			(when (<= indexX 0)
+			(print "It worked?")
+			(print indexX)
+		)
 		
 		)
 
@@ -178,6 +188,7 @@ Returns:
 		)
 		
 		
+		
 		;Determine if the up left sucessor can be generated
 		(when (and (and (> (mod indexX 8) 0)
 			(not (eq indexX 0) )) (>= (/ indexX (float 8)) 1))
@@ -186,7 +197,7 @@ Returns:
 					(setf leftUp(CheckAllMoves oth (- indexX 9) color))
 			)
 		)
-
+		
 		
 		;Determine if the up right sucessor can be generated
 		(when (and (< (mod indexX 8) (- 8 1)) (>= (/ indexX (float 8)) 1))
@@ -300,12 +311,21 @@ Returns:
 		;(setf pos (AllPositions color oth))
 		(setf indexX pos)
 		
-
+		
+		(when (<= indexX 0)
+			(print "At zero")
+			(print indexX)
+		)
+		
+		
 		;Determine if the left sucessor can be generated
 		(when (and (> (mod indexX 8) 0)
-			 (not (eq indexX 0) ))
+			 (not (<= indexX 0) ))
 			 
+			 (print "starting poopy")
+			 (print indexX)
 			(setf left (CheckMoveL oth indexX endColor))
+			(print "Poopy buttz")
 		)
 		
 		;Determine if the right sucessor can be generated
@@ -325,7 +345,7 @@ Returns:
 		
 		;Determine if the up left sucessor can be generated
 		(when (and (and (> (mod indexX 8) 0)
-			(not (eq indexX 0) )) (>= (/ indexX (float 8)) 1))			 
+			(not (<= indexX 0) )) (>= (/ indexX (float 8)) 1))			 
 			(setf leftUp (CheckMoveUL oth indexX endColor))
 		)
 		
@@ -336,7 +356,7 @@ Returns:
 
 		;Determine if the down left sucessor can be generated
 		(when (and (and (> (mod indexX 8) 0)
-			 (not (eq indexX 0) )) (< (/ indexX (float 8)) (- 8 1)))	 
+			 (not (<= indexX 0) )) (< (/ indexX (float 8)) (- 8 1)))	 
 			(setf leftDown (CheckMoveDL oth indexX endColor))
 		)
 
@@ -348,6 +368,12 @@ Returns:
 		)
 
 		(setf endPos (list left right up down leftUp rightUp leftDown rightDown))
+		(when (and (< indexX 64)(> indexX -1)) 
+			(when (not (eq (nth indexX oth) '-))
+				(setf endPos nil)
+			)
+		)
+		
 		
 		
 ;		(print lst)
@@ -361,7 +387,12 @@ Returns:
 ;		(Print rightUp)
 ;		(Print leftDown)
 ;		(Print rightDown)
-		(CreateMove oth pos endPos endColor)
+
+		
+
+		(setf lst(CreateMove oth pos endPos endColor))
+		
+		lst
 	)
 )
 
@@ -728,7 +759,7 @@ Returns:
 		
 		(do ((indexX (- pos 1) (setf indexX (- indexX 1))))
 					 ; did we find a positionge
-			((or (not (equal endPos 0)))
+			((or (not (equal endPos 0)) (< indexX 0))
 				)
 			
 			(when(and (not(equal indexX (- pos 1)))(equal (nth indexX oth) color)) 
@@ -795,6 +826,12 @@ Returns:
 			(setf tempList nil)
 ;			(print nil)
 		)
+		
+		(when (<= pos 0)
+			(print "Move Made")
+			(print pos)
+		)
+		
 		tempList
 	)
 )

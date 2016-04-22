@@ -126,7 +126,7 @@ Returns:
 *****************************************************************************|#
 
 (defun deepenough (depth)
-	(if (eq 0 depth) 
+	(if (>= 0 depth) 
 		t
 		nil
 	)
@@ -151,13 +151,21 @@ Returns:
 
 (defun static (position color)
 	(let (sum numBlanks)
+	
+	(cond	
+		((equal color 'w)
+		(setq color 'b))
+
+		((equal color 'w)
+		(setq color 'b))		
+	)
 	(setf sum 0)
 	(setf sumBlanks 0)
 	(setf sum (+ sum (posStrat position color)))
-	(setf sum (+ sum (isBetween color position *edgeTopRow* 1)))
-	(setf sum (+ sum (isBetween color position *edgeBottomRow* 1)))
-	(setf sum (+ sum (isBetween color position *edgeLeftColumn* 8)))
-	(setf sum (+ sum (isBetween color position *edgeRightColumn* 8)))
+;	(setf sum (+ sum (isBetween color position *edgeTopRow* 1)))
+;	(setf sum (+ sum (isBetween color position *edgeBottomRow* 1)))
+;	(setf sum (+ sum (isBetween color position *edgeLeftColumn* 8)))
+;	(setf sum (+ sum (isBetween color position *edgeRightColumn* 8)))
 	
 	(setf numBlanks 0)	
 
