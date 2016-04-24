@@ -2,15 +2,22 @@
 #|*****************************************************************************  
 Author: Alex Nienheuser, Savoy Schuler
 
-Function:		
+Function:		 input
 
-Description: 		
+Description: 
+	
+	The input function is used upon program start up to register the player's
+	chosen color (passed in as a command line argument) or prompt the player
+	to select one. The player's color is stored in the global variable *player*.
+	The AI's color is set opposite of the player's selection in the global 
+	variable *AIColor*.
 
 
-Parameters: 
+Parameters: args - command line argument (0 or 1)
+			read - reads prompted user input (if 0 command line args)
 
-
-Returns:
+Returns: 	*player* - sets player color (b or w)
+			*AIColor* - sets AI color opposite of player color (b or W)
 
 
 *****************************************************************************|#
