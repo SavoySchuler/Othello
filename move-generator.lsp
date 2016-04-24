@@ -60,7 +60,7 @@ Returns:
 		;place move in board 
 		;(setf (nth pos *board*) *player*)
 		
-		(setf lst (CheckAllMoves *board* pos *player*))
+		(setf lst (check-all-moves *board* pos *player*))
 		(print "Success")
 		(cond 		
 		((null lst)
@@ -135,7 +135,7 @@ Returns:
 	
 		(setf children nil)
 	
-		(setf pos (AllPositions endColor oth))
+		(setf pos (all-positions endColor oth))
 	
 		(dolist (indexX pos)
 		
@@ -144,7 +144,7 @@ Returns:
 			 (not (eq indexX 0) ))
 			
 			(when (eq (nth (- indexX 1) oth)'-)
-				(CheckAllMoves oth (- indexX 1) color)
+				(check-all-moves oth (- indexX 1) color)
 			)
 			
 		)
@@ -159,7 +159,7 @@ Returns:
 		)
 		
 			(when (eq (nth (+ indexX 1) oth)'-)
-					(setf right(CheckAllMoves oth (+ indexX 1) color))
+					(setf right(check-all-moves oth (+ indexX 1) color))
 			)
 			(when (<= indexX 0)
 			(print "It worked?")
@@ -173,7 +173,7 @@ Returns:
 		(when (>= (/ indexX (float 8)) 1)
 		
 			(when (eq (nth (- indexX 8) oth)'-)
-					(setf up (CheckAllMoves oth (- indexX 8) color))
+					(setf up (check-all-moves oth (- indexX 8) color))
 			)
 				
 		)
@@ -183,7 +183,7 @@ Returns:
 		(when (< (/ indexX (float 8)) (- 8 1))
 		
 			(when (eq (nth (+ indexX 8) oth)'-)
-					(setf down(CheckAllMoves oth (+ indexX 8) color))
+					(setf down(check-all-moves oth (+ indexX 8) color))
 			)
 		)
 		
@@ -194,7 +194,7 @@ Returns:
 			(not (eq indexX 0) )) (>= (/ indexX (float 8)) 1))
 			 
 			(when (eq (nth (- indexX 9) oth)'-)
-					(setf leftUp(CheckAllMoves oth (- indexX 9) color))
+					(setf leftUp(check-all-moves oth (- indexX 9) color))
 			)
 		)
 		
@@ -203,7 +203,7 @@ Returns:
 		(when (and (< (mod indexX 8) (- 8 1)) (>= (/ indexX (float 8)) 1))
 			
 			(when (eq (nth (- indexX 7) oth)'-)
-					(setf rightUp(CheckAllMoves oth (- indexX 7) color))
+					(setf rightUp(check-all-moves oth (- indexX 7) color))
 			)
 
 		)
@@ -214,7 +214,7 @@ Returns:
 			(not (eq indexX 0) )) (< (/ indexX (float 8)) (- 8 1)))
 			
 			(when (eq (nth (+ indexX 7) oth)'-)
-				(setf leftDown(CheckAllMoves oth (+ indexX 7) color))
+				(setf leftDown(check-all-moves oth (+ indexX 7) color))
 			)
 
 		)
@@ -224,7 +224,7 @@ Returns:
 		(when (and (< (mod indexX 8) (+ 8 1)) (< (/ indexX (float 8)) (- 8 1)))
 			
 			(when (eq (nth (+ indexX 9) oth)'-)
-					(setf rightDown(CheckAllMoves oth (+ indexX 9) color))
+					(setf rightDown(check-all-moves oth (+ indexX 9) color))
 			)
 		)
 		
@@ -275,7 +275,7 @@ Returns:
 
 *****************************************************************************|#
 
-(defun AllPositions (color oth)
+(defun all-positions (color oth)
   (loop
     for element in oth 
     and position from 0
@@ -301,14 +301,14 @@ Returns:
 
 *****************************************************************************|#
 
-(defun CheckAllMoves (oth pos endColor)
+(defun check-all-moves (oth pos endColor)
 (let (indexX lst left right up down leftUp rightUp leftDown rightDown)
 ;		(if (eq color 'w)
 ;			(setf endColor 'b)
 ;			(setf endColor 'w)
 ;		)
 	
-		;(setf pos (AllPositions color oth))
+		;(setf pos (all-positions color oth))
 		(setf indexX pos)
 		
 		
@@ -324,46 +324,46 @@ Returns:
 			 
 			 (print "starting poopy")
 			 (print indexX)
-			(setf left (CheckMoveL oth indexX endColor))
+			(setf left (check-move-L oth indexX endColor))
 			(print "Poopy buttz")
 		)
 		
 		;Determine if the right sucessor can be generated
 		(when (< (mod indexX 8) (- 8 1))
-			(setf right (CheckMoveR oth indexX endColor ))
+			(setf right (check-move-R oth indexX endColor ))
 		)
 
 		;Determine if the up sucessor can be generated 
 		(when (>= (/ indexX (float 8)) 1)		
-			(setf up (CheckMoveU oth indexX endColor ))
+			(setf up (check-move-U oth indexX endColor ))
 		)
 		
 		;Determine if the down sucessor can be generated
 		(when (< (/ indexX (float 8)) (- 8 1))
-			(setf down (CheckMoveD oth indexX endColor))
+			(setf down (check-move-D oth indexX endColor))
 		)
 		
 		;Determine if the up left sucessor can be generated
 		(when (and (and (> (mod indexX 8) 0)
 			(not (<= indexX 0) )) (>= (/ indexX (float 8)) 1))			 
-			(setf leftUp (CheckMoveUL oth indexX endColor))
+			(setf leftUp (check-move-UL oth indexX endColor))
 		)
 		
 		;Determine if the up right sucessor can be generated
 		(when (and (< (mod indexX 8) (- 8 1)) (>= (/ indexX (float 8)) 1))			
-			(setf rightUp (CheckMoveUR oth indexX endColor))
+			(setf rightUp (check-move-UR oth indexX endColor))
 		)
 
 		;Determine if the down left sucessor can be generated
 		(when (and (and (> (mod indexX 8) 0)
 			 (not (<= indexX 0) )) (< (/ indexX (float 8)) (- 8 1)))	 
-			(setf leftDown (CheckMoveDL oth indexX endColor))
+			(setf leftDown (check-move-DL oth indexX endColor))
 		)
 
 		;Determine if the down right sucessor can be generated
 		(when (and (< (mod indexX 8) (- 8 1)) (< (/ indexX (float 8)) (- 8 1)))
 			
-			(setf rightDown(CheckMoveDR oth indexX endColor))
+			(setf rightDown(check-move-DR oth indexX endColor))
 			
 		)
 
@@ -390,7 +390,7 @@ Returns:
 
 		
 
-		(setf lst(CreateMove oth pos endPos endColor))
+		(setf lst(create-move oth pos endPos endColor))
 		
 		lst
 	)
@@ -412,7 +412,7 @@ Returns:
 
 *****************************************************************************|#
 
-(defun CheckMoveUL (oth pos color)
+(defun check-move-UL (oth pos color)
 	(let (row)
 	
 		(setf endPos 0)
@@ -461,7 +461,7 @@ Returns:
 
 *****************************************************************************|#
 
-(defun CheckMoveUR (oth pos color)
+(defun check-move-UR (oth pos color)
 	(let (row)
 	
 		(setf endPos 0)
@@ -508,7 +508,7 @@ Returns:
 
 *****************************************************************************|#
 
-(defun CheckMoveDL (oth pos color)
+(defun check-move-DL (oth pos color)
 	(let (row)
 	
 		(setf endPos 0)
@@ -558,7 +558,7 @@ Returns:
 
 *****************************************************************************|#
 
-(defun CheckMoveDR (oth pos color)
+(defun check-move-DR (oth pos color)
 	(let (row)
 	
 		(setf endPos 0)
@@ -608,7 +608,7 @@ Returns:
 
 *****************************************************************************|#
 
-(defun CheckMoveD (oth pos color)
+(defun check-move-D (oth pos color)
 	(let (row)
 	
 		(setf endPos 0)
@@ -655,7 +655,7 @@ Returns:
 
 *****************************************************************************|#
 
-(defun CheckMoveU (oth pos color)
+(defun check-move-U (oth pos color)
 	(let (row)
 	
 		(setf endPos 0)
@@ -702,7 +702,7 @@ Returns:
 
 *****************************************************************************|#
 
-(defun CheckMoveR (oth pos color)
+(defun check-move-R (oth pos color)
 	(let (row)
 	
 		(setf endPos 0)
@@ -750,7 +750,7 @@ Returns:
 
 *****************************************************************************|#
 
-(defun CheckMoveL (oth pos color)
+(defun check-move-L (oth pos color)
 	(let (row)
 	
 		(setf endPos 0)
@@ -797,7 +797,7 @@ Returns:
 
 *****************************************************************************|#
 
-(defun CreateMove (lst pos endPos endColor)
+(defun create-move (lst pos endPos endColor)
 	(let (tempList offsets valid)
 		(setf valid nil)
 ;		(setf endColor 'b)
@@ -837,7 +837,7 @@ Returns:
 )
 
 
-(defun AINoMove ()
+(defun AI-no-move ()
 	(if (null (move-generator *board* *AIColor*))
 		nil
 		t
@@ -845,7 +845,7 @@ Returns:
 
 )
 
-(defun PlayerNoMove ()
+(defun player-no-move ()
 	(if (null (move-generator *board* *player*))
 		nil
 		t

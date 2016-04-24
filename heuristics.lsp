@@ -264,7 +264,7 @@ Returns:
 	(let (lst sum)
 		
 		(setf sum 0)
-		(setf lst (AllPositions color position))
+		(setf lst (all-positions color position))
 		
 		(dolist (indexX lst)
 			(setf sum (+ sum (nth indexX *positionalStrat*)))
