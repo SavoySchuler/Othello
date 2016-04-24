@@ -8,6 +8,8 @@ To do:	terminate game
 		test alpha-beta  
 		fix input
 
+		- do we use isBetween or do we only use 2 heuristics?
+
 Done
 
 Savoy: 	human-move

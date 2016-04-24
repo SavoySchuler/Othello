@@ -13,12 +13,25 @@ Description:
 	variable *AIColor*.
 
 
-Parameters: args - command line argument (0 or 1)
-			read - reads prompted user input (if 0 command line args)
+Usage:	(input args) 
+	
+	Where args is the command line argument passed in, if any, setting a player
+	color for the user. If no command line argument is provided, the function
+	will prompt the user for input, stored in read, which will be used to set
+	the user's player color. 
+	
 
-Returns: 	*player* - sets player color (b or w)
-			*AIColor* - sets AI color opposite of player color (b or W)
+Out:	(*player* *AIColor*)
 
+	Where *player* is the global variable that will be set to the user's
+	chosen player color (b or w) and *AIColor* will be set to the opposite value
+	for the	AI's player color. 
+	
+
+Functions called: 
+
+	(input args) - to recursively ask the user to select a player color if 
+	invalid input is entered.
 
 *****************************************************************************|#
 

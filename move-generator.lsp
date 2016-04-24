@@ -2,10 +2,19 @@
  Filename: orthello.lsp
 
 
- Author: Alex Nienhueser, Savoy  Schuler
+ Authors: Alex Nienhueser, Savoy  Schuler
 
 
  Description:
+
+Usage:	
+	
+
+Returns:
+	
+
+Functions called:
+
 
 
 *****************************************************************************|#
@@ -31,17 +40,20 @@
 
 
 #|*****************************************************************************  
-Author: Alex Nienheuser, Savoy Schuler
+Authors: Alex Nienheuser, Savoy Schuler
 
 Function:		
 
 Description: 		
 
 
-Parameters: 
-
+Usage:	
+	
 
 Returns:
+	
+
+Functions called:
 
 
 *****************************************************************************|#
@@ -74,17 +86,21 @@ Returns:
 
 
 #|*****************************************************************************  
-Author: Alex Nienheuser, Savoy Schuler
+Authors: Alex Nienheuser, Savoy Schuler
 
 Function:		
 
 Description: 		
 
 
-Parameters: 
-
+Usage:	
+	
 
 Returns:
+	
+
+Functions called:
+
 
 
 *****************************************************************************|#
@@ -109,17 +125,20 @@ Returns:
 
 
 #|*****************************************************************************  
-Author: Alex Nienheuser, Savoy Schuler
+Authors: Alex Nienheuser, Savoy Schuler
 
 Function:		
 
 Description: 		
 
 
-Parameters: 
-
+Usage:	
+	
 
 Returns:
+	
+
+Functions called:
 
 
 *****************************************************************************|#
@@ -260,17 +279,21 @@ Returns:
 
 
 #|*****************************************************************************  
-Author: Alex Nienheuser, Savoy Schuler
+Authors: Alex Nienheuser, Savoy Schuler
 
 Function:		
 
 Description: 		
 
 
-Parameters: 
-
+Usage:	
+	
 
 Returns:
+	
+
+Functions called:
+
 
 
 *****************************************************************************|#
@@ -286,17 +309,21 @@ Returns:
 
 
 #|*****************************************************************************  
-Author: Alex Nienheuser, Savoy Schuler
+Authors: Alex Nienheuser, Savoy Schuler
 
 Function:		
 
 Description: 		
 
 
-Parameters: 
-
+Usage:	
+	
 
 Returns:
+	
+
+Functions called:
+
 
 
 *****************************************************************************|#
@@ -397,17 +424,20 @@ Returns:
 )
 
 #|*****************************************************************************  
-Author: Alex Nienheuser, Savoy Schuler
+Authors: Alex Nienheuser, Savoy Schuler
 
 Function:		
 
 Description: 		
 
 
-Parameters: 
-
+Usage:	
+	
 
 Returns:
+	
+
+Functions called:
 
 
 *****************************************************************************|#
@@ -446,17 +476,21 @@ Returns:
 )
 
 #|*****************************************************************************  
-Author: Alex Nienheuser, Savoy Schuler
+Authors: Alex Nienheuser, Savoy Schuler
 
 Function:		
 
 Description: 		
 
 
-Parameters: 
-
+Usage:	
+	
 
 Returns:
+	
+
+Functions called:
+
 
 
 *****************************************************************************|#
@@ -493,17 +527,21 @@ Returns:
 )
 
 #|*****************************************************************************  
-Author: Alex Nienheuser, Savoy Schuler
+Authors: Alex Nienheuser, Savoy Schuler
 
 Function:		
 
 Description: 		
 
 
-Parameters: 
-
+Usage:	
+	
 
 Returns:
+	
+
+Functions called:
+
 
 
 *****************************************************************************|#
@@ -543,17 +581,20 @@ Returns:
 
 
 #|*****************************************************************************  
-Author: Alex Nienheuser, Savoy Schuler
+Authors: Alex Nienheuser, Savoy Schuler
 
 Function:		
 
 Description: 		
 
 
-Parameters: 
-
+Usage:	
+	
 
 Returns:
+	
+
+Functions called:
 
 
 *****************************************************************************|#
@@ -593,17 +634,21 @@ Returns:
 
 
 #|*****************************************************************************  
-Author: Alex Nienheuser, Savoy Schuler
+Authors: Alex Nienheuser, Savoy Schuler
 
 Function:		
 
 Description: 		
 
 
-Parameters: 
-
+Usage:	
+	
 
 Returns:
+	
+
+Functions called:
+
 
 
 *****************************************************************************|#
@@ -640,17 +685,21 @@ Returns:
 
 
 #|*****************************************************************************  
-Author: Alex Nienheuser, Savoy Schuler
+Authors: Alex Nienheuser, Savoy Schuler
 
 Function:		
 
 Description: 		
 
 
-Parameters: 
-
+Usage:	
+	
 
 Returns:
+	
+
+Functions called:
+
 
 
 *****************************************************************************|#
@@ -687,17 +736,21 @@ Returns:
 
 
 #|*****************************************************************************  
-Author: Alex Nienheuser, Savoy Schuler
+Authors: Alex Nienheuser, Savoy Schuler
 
 Function:		
 
 Description: 		
 
 
-Parameters: 
-
+Usage:	
+	
 
 Returns:
+	
+
+Functions called:
+
 
 
 *****************************************************************************|#
@@ -735,17 +788,21 @@ Returns:
 
 
 #|*****************************************************************************  
-Author: Alex Nienheuser, Savoy Schuler
+Authors: Alex Nienheuser, Savoy Schuler
 
 Function:		
 
 Description: 		
 
 
-Parameters: 
-
+Usage:	
+	
 
 Returns:
+	
+
+Functions called:
+
 
 
 *****************************************************************************|#
@@ -782,17 +839,21 @@ Returns:
 
 
 #|*****************************************************************************  
-Author: Alex Nienheuser, Savoy Schuler
+
+Authors: Alex Nienheuser, Savoy Schuler
 
 Function:		
 
 Description: 		
 
 
-Parameters: 
-
+Usage:	
+	
 
 Returns:
+	
+
+Functions called:
 
 
 *****************************************************************************|#
@@ -837,6 +898,26 @@ Returns:
 )
 
 
+#|*****************************************************************************  
+
+Authors: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Usage:	
+	
+
+Returns:
+	
+
+Functions called:
+
+
+*****************************************************************************|#
+
 (defun AI-no-move ()
 	(if (null (move-generator *board* *AIColor*))
 		nil
@@ -844,6 +925,26 @@ Returns:
 	)
 
 )
+
+#|*****************************************************************************  
+
+Authors: Alex Nienheuser, Savoy Schuler
+
+Function:		
+
+Description: 		
+
+
+Usage:	
+	
+
+Returns:
+	
+
+Functions called:
+
+
+*****************************************************************************|#
 
 (defun player-no-move ()
 	(if (null (move-generator *board* *player*))

@@ -1,5 +1,5 @@
-#|
-                  ***** MINIMAX.LSP *****
+#|*****************************************************************************
+               			   ***** MINIMAX.LSP *****
 
 Generalized recursive minimax routine.
 
@@ -28,7 +28,37 @@ Functions called:
               applies the static evaluation function to the position.
 
           Note: these functions may need additional arguments.
-|#
+
+
+*******************************************************************************
+
+Modifications: Alex Nienheuser, Savoy Schuler 
+
+Modification description:
+
+	Dr. Weiss' minimax function was modified to include alpha-beta pruning to
+	enhance time and efficiency. The alpha-beta pruning additions can be found
+	mostly in the second half of the function. Additionally, function calls were
+	modified to include extra paramaters added for calling minimax or other
+	functions that minimax is dependent on but were not were not provided.
+
+Modified Usage:
+	
+	(minimax position depth color alpha beta isMaxLevel) 
+
+	Where position is the position to be evaluated, depth is the search depth 
+	(number of plys), color is the color currently being assessed in minimax,
+	alpha and beta are used for alpha-beta pruning and are passed in 
+	from the last minimax call to determine upward/rightward position tree
+	pruning, and isMaxLevel is a flag to tell whethere the alpha-beta pruning
+	will be at a min level or a max level for current pass.
+
+Added functions called:
+
+	(minimax position depth color alpha beta isMaxLevel) - To recursively 
+		evaluate a patheway to the most optimal move choice. 
+
+*****************************************************************************|#
 
 (defun minimax (position depth color alpha beta isMaxLevel) 
 
@@ -112,16 +142,28 @@ Functions called:
 #|*****************************************************************************  
 Author: Alex Nienheuser, Savoy Schuler
 
-Function:		
+Function:	deepenough
 
-Description: 		
+Description: 
+	
+	This function is essentially the interator for minimax each time it is
+	called. minimax() will decrement depth each iteration and pass it to
+	deepenough(). The function will check to see if the depth is equal to or
+	less than zero, and if so return t. Else it will return nil. This flag, if
+	t, will tell minimax to stop expanding and return the present position 
+	states, else it will keep expanding. 
 
 
-Parameters: 
+Usage:	(deepenough depth)
 
+	Where depth is the current number of times left to perform minimax.
 
-Returns:
+Returns:	(t) or (nil)
 
+	Where t if the specified depth value for the minimax has been met or nil if
+	the specified depth value has not been met.
+
+Functions called: none
 
 *****************************************************************************|#
 
@@ -136,22 +178,59 @@ Returns:
 #|*****************************************************************************  
 Author: Alex Nienheuser, Savoy Schuler
 
-Function:		
+Function: static
 
 Description: 		
 
+	The static function is used to determine the value of a move by calculating
+	the heurstical advantage of board state. The function performs each
+	heuristical calculation and returns the added sum of all the hueristics. The
+	primary heuristic is to weight each position by its staticstically determin-
+	ed values, all of which are saved in a look-up table for fast access. 
+	
+	The secondary strategy is premised around the observation that it is more
+	advantageous to play for less pieces early on. This allows the opposing
+	player to fill center of the board with their pieces, allowing the AI to
+	to take more advantageous pieces on the edges and outer region, each of 
+	which will score significantly more pieces in the last stretch of the game,
+	as the centric (and flipable) tiles will belong mostly to the opponent.
+	This heuristic is enforced by valuing having less of your own pieces early
+	on, but does not negate the value of a position as to not override the
+	motivation to take corner and edge pieces. The switch as to when to start
+	playing for more of the AI's own pieces is determined by the number of blank
+	tiles remaining as to allow for easy adjustment for fine tuning. 
 
-Parameters: 
+	It is noted that the secondary strategy is risky if an opponent has a keen
+	eye for forcing the AI into moveless traps early. This consideration is
+	solved by prefering positional value discontiguously with the secondary
+	heuristic.  
 
 
-Returns:
+Usage:    (static position color)
+         
+	Where position is a board state on which to perform heuristical calculations
+	of its value and color is the current player's color. 
 
+Returns:  (sum)
+
+	Where sum is the the heuristically determined value of the board state to 
+	the current player in calculation (alternates by ply)
+
+Functions called:
+
+	(position-strategy) - heuristic call for the value of a positions
+
+	(more-player-count position color) - heuristic prefering more player pieces
+	
+	(more-opponent-count position color) - heurisitc prefering more opponent
+		pieces.
 
 *****************************************************************************|#
 
 (defun static (position color)
 	(let (sum numBlanks)
 	
+	;switch the color to represent the player who will have the next turn
 	(cond	
 		((equal color 'w)
 		(setq color 'b))
@@ -159,17 +238,21 @@ Returns:
 		((equal color 'w)
 		(setq color 'b))		
 	)
+
+	;initialize sums to zero
 	(setf sum 0)
 	(setf sumBlanks 0)
+	
+	;keep running sum of added value of each heuristic
 	(setf sum (+ sum (position-strategy position color)))
 ;	(setf sum (+ sum (is-between color position *edgeTopRow* 1)))
 ;	(setf sum (+ sum (is-between color position *edgeBottomRow* 1)))
 ;	(setf sum (+ sum (is-between color position *edgeLeftColumn* 8)))
 ;	(setf sum (+ sum (is-between color position *edgeRightColumn* 8)))
 	
-	(setf numBlanks 0)	
 
-	;find out how many blank spaces remain
+	;find out how many blank spaces remain	
+	(setf numBlanks 0)	
 	(dolist (tilePiece *board*)  
 	 	(when (equal tilePiece '-) 
 			(setf numBlanks (+ numBlanks 1))
@@ -182,6 +265,7 @@ Returns:
 		(setf sum (+ sum (more-opponent-count position color)))
 	)
 
+	;return sum
 	sum	
 	)
 )
