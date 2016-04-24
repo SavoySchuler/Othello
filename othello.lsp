@@ -84,18 +84,33 @@ Functions called:
 #|*****************************************************************************  
 Author: Alex Nienheuser, Savoy Schuler
 
-Function:		
+Function:	player-first
 
-Description: 		
+Description: 
+
+																				;;;; stuff here, waiting to see if opp-first gets merged in
 
 
-Usage:	
+Usage:	(player-first)
 	
 
-Returns:
+Out:  (*board*)
+
+	Where *board* is the global state of the game board modified every turn by
+	a players move. 
 	
 
 Functions called:
+
+	(print-othello *board*) - to print the board before every player move.
+
+	(human-move userMove)	- valid and execute the user's move, else retry if 
+		invalid move entered.
+
+	(minimax *board* 2 *AIColor* -100000 100000 t)	- call to the AI's move,
+		first calculated by minimax where alpha-beta pruning will begin at the
+		initial state on the max level, and then applied to the game board,
+		*board*.
 
 
 *****************************************************************************|#
@@ -124,7 +139,7 @@ Functions called:
 #|*****************************************************************************  
 Author: Alex Nienheuser, Savoy Schuler
 
-Function:		
+Function:	opponent-first
 
 Description: 		
 
@@ -161,7 +176,7 @@ Functions called:
 #|*****************************************************************************  
 Author: Alex Nienheuser, Savoy Schuler
 
-Function:		
+Function:	score	
 
 Description: 		
 
@@ -229,7 +244,7 @@ Functions called:
 #|*****************************************************************************  
 Author: Alex Nienheuser, Savoy Schuler
 
-Function:		
+Function:	end-game
 
 Description: 		
 

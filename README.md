@@ -4,38 +4,44 @@ CSC447 Artificial Intelligence - Project 3
 Partners: Savoy Schuler, Alex Nienhueser
 
 To do:	terminate game
-		documentation
 		test alpha-beta  
 		fix input
 
-		- do we use isBetween or do we only use 2 heuristics?
-
+		do we use isBetween or do we only use 2 heuristics in static?
+		
+		documentation:
+			heuristics.lsp
+			move-generator.lsp
+			othello.lsp
+			
 Done
 
 Savoy: 	human-move
 	othello
-	playerFirst
-	OpponentFirst
+	player-first
+	opponent-first
 	score
-	endgame	
+	end-game	
 	input
-	morePlayerCount
-	moreOpponentCount
+	more-player-count
+	more-opponent-count
 	minimax (including alph-beta pruning)
 	deepenough
 	static
-	doc formatting
+	documentation 
+	formatting
 
 
-Alex:	PrintOthello
+Alex:	print-othello
 	move-generator
-	CreateMove
-	AllPositions
-	CheckAllMoves
-	CheckMove (UR, UL, DL, DR, U, D, R, L) 
+	create-move
+	all-positions
+	check-all-moves
+	check-move (UR, UL, DL, DR, U, D, R, L) 
+	position-strategy	
+	is-between	
 	cornerHeuristics		-discarded heuristic, was completed
-	aroundConerHeuristic	-discarded heuristic, was completed
-	posStart
+	aroundConerHeuristic	-discarded heuristic, was completed	
 	betweenEdgePieces		-discarded heuristic, was completed
-	isBetween
+	documentation
 
