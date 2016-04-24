@@ -65,7 +65,7 @@ Returns:
 		(cond 		
 		((null lst)
 			(format t "Invalid move, try again.")		
-		 	(playerFirst)
+		 	(player-first)
 		)		
 		(t (setf *board* lst))
 		)		

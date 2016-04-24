@@ -70,8 +70,8 @@ Returns:
 	(format t "Welcome to Othello. Let the match begin!~%")
 	(if
 		(eq *player* 'b)
-		(playerFirst)
-		(opponentFirst)
+		(player-first)
+		(opponent-first)
 	)	
 	score
 	endgame
@@ -94,7 +94,7 @@ Returns:
 
 *****************************************************************************|#
 
-(defun playerFirst ()
+(defun player-first ()
 	(let (userMove)		
 		(do ( ( i 0 (1+ i) ) )
 			(( >= i 8) ‘done)  ;termination test
@@ -131,7 +131,7 @@ Returns:
 
 *****************************************************************************|#
 
-(defun opponentFirst ()
+(defun opponent-first ()
 	(let (userMove lst)	
 		(do ( ( i 0 (1+ i) ) )
 			(( >= i 10) ‘done)  							;termination test
