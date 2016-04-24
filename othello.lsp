@@ -74,7 +74,7 @@ Returns:
 		(opponent-first)
 	)	
 	score
-	endgame
+	end-game
 )
 
 
@@ -98,7 +98,7 @@ Returns:
 	(let (userMove)		
 		(do ( ( i 0 (1+ i) ) )
 			(( >= i 8) ‘done)  ;termination test
-			(PrintOthello *board*)		
+			(print-othello *board*)		
 			(format t "~%What is your move [row col]? ")
 			(setf userMove (append userMove (list (read))))
 			(setf userMove (append userMove (list (read))))			
@@ -140,7 +140,7 @@ Returns:
 			(when (not (null lst))
 			(setf *board* (nth 0 (nth 1 lst)))
 )
-			(PrintOthello *board*)
+			(print-othello *board*)
 			(format t "~%Please enter the coordinates of your move as (x y):")
 			(setf userMove (read))
 			(human-move userMove)	
@@ -229,7 +229,7 @@ Returns:
 
 *****************************************************************************|#
 
-(defun endgame ()	
+(defun end-game ()	
 	(format t "Would you like to play again (y/n)?") 
 	(setf playAgain (read))
 	
@@ -252,7 +252,7 @@ Returns:
 		)
 	)
 
-	endgame						
+	end-game						
 )				
 
 
@@ -262,4 +262,4 @@ Returns:
 
 ;know: (load 'othello)
 ;know: (test)
-;know: (PrintOthello (nth 0 (nth 1 butt)))
+;know: (print-othello (nth 0 (nth 1 butt)))

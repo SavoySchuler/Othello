@@ -89,7 +89,7 @@ Returns:
 
 *****************************************************************************|#
 	
-(defun PrintOthello (oth)
+(defun print-othello (oth)
 ;	(setf *lst2* oth)
 
 	(format t "~%   1 2 3 4 5 6 7 8")
@@ -233,14 +233,14 @@ Returns:
 		
 		)
 		
-;		(PrintOthello left) 
-;		(PrintOthello right) 
-;		(PrintOthello up) 
-;		(PrintOthello down) 
-;		(PrintOthello leftUp)
-;		(PrintOthello rightUp)
-;		(PrintOthello leftDown)
-;		(PrintOthello rightDown)
+;		(print-othello left) 
+;		(print-othello right) 
+;		(print-othello up) 
+;		(print-othello down) 
+;		(print-othello leftUp)
+;		(print-othello rightUp)
+;		(print-othello leftDown)
+;		(print-othello rightDown)
 		(setf children(remove nil children))
 		(setf children(remove-duplicates children :test #'equal))
 		
@@ -248,9 +248,9 @@ Returns:
 ;		(print endColor)
 ;		(print "Turn")
 ;		(print "Printing Othello")
-;		(PrintOthello oth)
+;		(print-othello oth)
 ;		(dolist (indexX children)
-;			(PrintOthello indexX)
+;			(print-othello indexX)
 ;		)
 		
 		children
