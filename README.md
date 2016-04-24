@@ -3,10 +3,10 @@ CSC447 Artificial Intelligence - Project 3
 
 Partners: Savoy Schuler, Alex Nienhueser
 
-To do:	terminate game -alex
-		documentation/naming - savoy
+To do:	terminate game
+		documentation
 		test alpha-beta  
-
+		fix input
 
 Done
 
@@ -31,9 +31,9 @@ Alex:	PrintOthello
 	AllPositions
 	CheckAllMoves
 	CheckMove (UR, UL, DL, DR, U, D, R, L) 
-	cornerHeuristics
-	aroundConerHeuristic
+	cornerHeuristics		-discarded heuristic, was completed
+	aroundConerHeuristic	-discarded heuristic, was completed
 	posStart
-	betweenEdgePieces
+	betweenEdgePieces		-discarded heuristic, was completed
 	isBetween
 

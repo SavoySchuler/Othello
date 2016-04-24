@@ -161,11 +161,11 @@ Returns:
 	)
 	(setf sum 0)
 	(setf sumBlanks 0)
-	(setf sum (+ sum (posStrat position color)))
-;	(setf sum (+ sum (isBetween color position *edgeTopRow* 1)))
-;	(setf sum (+ sum (isBetween color position *edgeBottomRow* 1)))
-;	(setf sum (+ sum (isBetween color position *edgeLeftColumn* 8)))
-;	(setf sum (+ sum (isBetween color position *edgeRightColumn* 8)))
+	(setf sum (+ sum (position-strategy position color)))
+;	(setf sum (+ sum (is-between color position *edgeTopRow* 1)))
+;	(setf sum (+ sum (is-between color position *edgeBottomRow* 1)))
+;	(setf sum (+ sum (is-between color position *edgeLeftColumn* 8)))
+;	(setf sum (+ sum (is-between color position *edgeRightColumn* 8)))
 	
 	(setf numBlanks 0)	
 
@@ -178,8 +178,8 @@ Returns:
 
 	;heuristic to play for less pieces early on, then reverse
 	(if (< sumBlanks 25)
-		(setf sum (+ sum (morePlayerCount position color)))
-		(setf sum (+ sum (moreOpponentCount position color)))
+		(setf sum (+ sum (more-player-count position color)))
+		(setf sum (+ sum (more-opponent-count position color)))
 	)
 
 	sum	
