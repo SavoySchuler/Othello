@@ -127,15 +127,17 @@ Functions called:
 
 (defun player-first ()
 	(let (userMove)		
-		(cond (equal *AIColor* b')
-			((format t "~%~%Opponent's move:")
-			(setf lst (minimax *board* 2 *AIColor* -100000 100000 t))
-			(when (not (null lst))
-				(setf *board* (nth 0 (nth 1 lst)))
-			)
-			(format t "~%")	
+		 
+			(when (equal *AIColor* 'b)
+				(format t "~%~%Opponent's move:")
+				(setf lst (minimax *board* 2 *AIColor* -100000 100000 t))
+				(when (not (null lst))
+					(setf *board* (nth 0 (nth 1 lst)))
+				)
+				(format t "~%")	
+				
 			)		
-		)
+		
 
 		(do ( ( i 0 (1+ i) ) )
 			(( >= i 70) ‘done)  ;termination test
