@@ -159,41 +159,6 @@ Functions called:
 	)
 )
 
-#|*****************************************************************************  
-Author: Alex Nienheuser, Savoy Schuler
-
-Function:	opponent-first
-
-Description: 		
-
-
-Usage:	
-	
-
-Returns:
-	
-
-Functions called:
-
-
-*****************************************************************************|#
-
-(defun opponent-first ()
-	(let (userMove lst)	
-		(do ( ( i 0 (1+ i) ) )
-			(( >= i 10) ‘done)  							;termination test
-			
-			(setf lst (minimax *board* 2 *AIColor*))			
-			(when (not (null lst))
-			(setf *board* (nth 0 (nth 1 lst)))
-)
-			(print-othello *board*)
-			(format t "~%Please enter the coordinates of your move as (x y):")
-			(setf userMove (read))
-			(human-move userMove)	
-		)
-	)
-)
 
 
 #|*****************************************************************************  
