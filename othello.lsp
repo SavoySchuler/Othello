@@ -118,7 +118,7 @@ Functions called:
 (defun player-first ()
 	(let (userMove)		
 		(do ( ( i 0 (1+ i) ) )
-			(( >= i 8) ‘done)  ;termination test
+			(( >= i 70) ‘done)  ;termination test
 			(print-othello *board*)		
 			(format t "~%What is your move [row col]? ")
 			(setf userMove (append userMove (list (read))))
