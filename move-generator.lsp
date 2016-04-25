@@ -745,7 +745,7 @@ Functions called:
 		
 		(do ((indexX (+ pos 1) (setf indexX (+ indexX 1))))
 					 ; did we find a position
-			((or (not (equal endPos 0)))
+			((or (not (equal endPos 0))(>= indexX 64))
 				)
 			
 			(when(and (not(equal indexX (+ pos 1)))(equal (nth indexX oth) color))
@@ -934,4 +934,14 @@ Functions called:
 	)
 
 )
+
+;(B W W W W W - -
+; B - B B W W - -
+; B B B W W W W W
+; B B B B B W - -
+; B B B B B W - -
+; B W W W W W W -
+; B B B B W - B -
+; B B B W W W - -)
+
 
