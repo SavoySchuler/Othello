@@ -18,8 +18,7 @@ Done
 
 Savoy: 	human-move
 	othello
-	player-first
-	opponent-first
+	play-game
 	score
 	end-game	
 	input
@@ -31,6 +30,10 @@ Savoy: 	human-move
 	documentation 
 	formatting
 
+
+Errors: ai no moves
+
+make move
 
 Alex:	print-othello
 	move-generator

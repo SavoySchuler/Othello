@@ -81,7 +81,7 @@ Functions called:
 (defun othello (args)
 	(input args)
 	(format t "~%Welcome to Othello. Let the match begin!~%")
-	(player-first)	
+	(play-game)	
 	(score)
 	(end-game)
 )
@@ -90,14 +90,14 @@ Functions called:
 #|*****************************************************************************  
 Author: Alex Nienheuser, Savoy Schuler
 
-Function:	player-first
+Function:	play-game
 
 Description: 
 
 																				;;;; stuff here, waiting to see if opp-first gets merged in
 
 
-Usage:	(player-first)
+Usage:	(play-game)
 	
 
 Out:  (*board*)
@@ -121,7 +121,7 @@ Functions called:
 
 *****************************************************************************|#
 
-(defun player-first ()
+(defun play-game ()
 	(let (userMove)		
 		 
 			(when (equal *AIColor* 'b)

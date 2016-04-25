@@ -73,7 +73,7 @@ Functions called:
 		(cond 		
 			((null lst)
 				(format t "Invalid move, try again.")		
-		 		(player-first)
+		 		(play-game)
 			)		
 			
 			(t 
