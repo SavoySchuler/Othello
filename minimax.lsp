@@ -231,13 +231,13 @@ Functions called:
 	(let (sum numBlanks)
 	
 	;switch the color to represent the player who will have the next turn
-	(cond	
-		((equal color 'w)
-		(setq color 'b))
-
-		((equal color 'w)
-		(setq color 'b))		
-	)
+	;(cond	
+	;	((equal color 'w)
+	;	(setq color 'b))
+;
+;		((equal color 'w)
+;		(setq color 'b))		
+;	)
 
 	;initialize sums to zero
 	(setf sum 0)

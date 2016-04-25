@@ -65,21 +65,22 @@ Functions called:
 		(setf posRow (* (- (car userMove) 1) 8))
 		(setf posCol (- (cadr userMove) 1))
 		(setf pos (+ posCol posRow))
-		(print pos)
 	
 		;check for legality
 		
 		;place move in board 
-		;(setf (nth pos *board*) *player*)
-		
 		(setf lst (check-all-moves *board* pos *player*))
-		(print "Success")
 		(cond 		
-		((null lst)
-			(format t "Invalid move, try again.")		
-		 	(player-first)
-		)		
-		(t (setf *board* lst))
+			((null lst)
+				(format t "Invalid move, try again.")		
+		 		(player-first)
+			)		
+			
+			(t 
+				(setf *board* lst)
+				(format t "~%Your move:")
+				(print-othello *board*)
+			)
 		)		
 	)
 )
@@ -170,21 +171,10 @@ Functions called:
 
 		
 		;Determine if the right sucessor can be generated
-		(when (< (mod indexX 8) (- 8 1))
-		
-		(when (<= indexX 0)
-			(print "It's going to start working?")
-			(print indexX)
-		)
-		
+		(when (< (mod indexX 8) (- 8 1))	
 			(when (eq (nth (+ indexX 1) oth)'-)
 					(setf right(check-all-moves oth (+ indexX 1) color))
-			)
-			(when (<= indexX 0)
-			(print "It worked?")
-			(print indexX)
-		)
-		
+			)	
 		)
 
 		
@@ -336,23 +326,14 @@ Functions called:
 ;		)
 	
 		;(setf pos (all-positions color oth))
-		(setf indexX pos)
-		
-		
-		(when (<= indexX 0)
-			(print "At zero")
-			(print indexX)
-		)
-		
+		(setf indexX pos)	
 		
 		;Determine if the left sucessor can be generated
 		(when (and (> (mod indexX 8) 0)
 			 (not (<= indexX 0) ))
 			 
-			 (print "starting poopy")
-			 (print indexX)
+	;		 (print indexX)
 			(setf left (check-move-L oth indexX endColor))
-			(print "Poopy buttz")
 		)
 		
 		;Determine if the right sucessor can be generated
@@ -888,10 +869,10 @@ Functions called:
 ;			(print nil)
 		)
 		
-		(when (<= pos 0)
-			(print "Move Made")
-			(print pos)
-		)
+		;(when (<= pos 0)
+		;	(print "Move Made")
+		;	(print pos)
+		;)
 		
 		tempList
 	)

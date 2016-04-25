@@ -52,12 +52,18 @@
 #|*****************************************************************************  
 Author: Alex Nienheuser, Savoy Schuler
 
-Function:		
+Function:	othello	
 
-Description: 		
+Description: 
+
+	This function is the program main. It will call the the input function to
+	have the user select a side. 
 
 
-Usage:	
+Usage:	(othello args)
+
+	Where args is the command line parameter passed in, if any, and is passed
+	to the input function to set the user's and AI's player colors.  
 	
 
 Returns:
@@ -65,12 +71,16 @@ Returns:
 
 Functions called:
 
+	(score) - to calculate the final score of the game upon completion
+
+	(end-game) - either terminates the game or start it again at the user's 
+		selection
 
 *****************************************************************************|#
 
 (defun othello (args)
 	(input args)
-	(format t "Welcome to Othello. Let the match begin!~%")
+	(format t "~%Welcome to Othello. Let the match begin!~%")
 	(if
 		(eq *player* 'b)
 		(player-first)
@@ -117,21 +127,32 @@ Functions called:
 
 (defun player-first ()
 	(let (userMove)		
-		(do ( ( i 0 (1+ i) ) )
-			(( >= i 70) ‘done)  ;termination test
-			(print-othello *board*)		
-			(format t "~%What is your move [row col]? ")
-			(setf userMove (append userMove (list (read))))
-			(setf userMove (append userMove (list (read))))			
-			(human-move userMove)
-;AI Move	
-			(print "ugh")	
+		(cond (equal *AIColor* b')
+			((format t "~%~%Opponent's move:")
 			(setf lst (minimax *board* 2 *AIColor* -100000 100000 t))
-			(print "failure")
 			(when (not (null lst))
 				(setf *board* (nth 0 (nth 1 lst)))
-				(print (nth 0 lst))
-			)	
+			)
+			(format t "~%")	
+			)		
+		)
+
+		(do ( ( i 0 (1+ i) ) )
+			(( >= i 70) ‘done)  ;termination test
+			(setf userMove () )
+			(format t "")	
+			(print-othello *board*)		
+			(format t "~%~%What is your move [row col]? ")
+			(setf userMove (append userMove (list (read))))
+			(setf userMove (append userMove (list (read))))		
+			(human-move userMove)
+;AI Move	
+			(format t "~%~%Opponent's move:")
+			(setf lst (minimax *board* 2 *AIColor* -100000 100000 t))
+			(when (not (null lst))
+				(setf *board* (nth 0 (nth 1 lst)))
+			)
+			(format t "~%")			
 		)
 	)
 )
@@ -290,8 +311,3 @@ Functions called:
 
 
 (othello *args*)
-
-
-;know: (load 'othello)
-;know: (test)
-;know: (print-othello (nth 0 (nth 1 butt)))
