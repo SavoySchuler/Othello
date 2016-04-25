@@ -81,13 +81,9 @@ Functions called:
 (defun othello (args)
 	(input args)
 	(format t "~%Welcome to Othello. Let the match begin!~%")
-	(if
-		(eq *player* 'b)
-		(player-first)
-		(opponent-first)
-	)	
-	score
-	end-game
+	(player-first)	
+	(score)
+	(end-game)
 )
 
 
@@ -129,6 +125,7 @@ Functions called:
 	(let (userMove)		
 		 
 			(when (equal *AIColor* 'b)
+				(print-othello *board*)
 				(format t "~%~%Opponent's move:")
 				(setf lst (minimax *board* 2 *AIColor* -100000 100000 t))
 				(when (not (null lst))
