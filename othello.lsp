@@ -230,47 +230,49 @@ Functions called: none
 
 (defun score ()
 	(let (playAgain enColor sumB sumW)
-	(setf sum 0)	
+	(setf sumW 0)
+	(setf sumB 0)	
 
 	(dolist (tilePiece *board*)  
 	 	(when (equal tilePiece 'b) 
-			(setf sum (+ sumB 1))
+			(setf sumB (+ sumB 1))
 		)
 	
 		(when (equal tilePiece 'w)
-			(setf sum (+ sumW 1))
+			(setf sumW (+ sumW 1))
 		)
 	)
-	(cond
-		(when (eq sumB sumA)
-			(format t "You tie! The score is ~a ~a" sumB sumA)
+	(print sumW)
+	(print sumB)
+
+	(when (eq sumB sumW)
+		(format t "You tie! The score is ~a ~a" sumB sumW)
+	)
+
+	(when (eq *player* 'b)
+		(when (> sumB sumW)
+			(format t "You win! The score is ~a ~a" sumB sumW)
 		)
 
-		(when (eq *player* 'b)
-			(cond			
-				(when (> sumB sumW)
-					(format t "You win! The score is ~a ~a" sumB sumA)
-				)
+		(when (< sumB sumW)
+			(format t "You lose! The score is ~a ~a" sumB sumW)
+		)		
+	)
 
-				(when (< sumB sumW)
-					(format t "You lose! The score is ~a ~a" sumB sumA)
-				)
-			)
+	(when (eq *player* 'w)
+		
+		(when (< sumB sumW)
+			(format t "You win! The score is ~a ~a" sumW sumB)
 		)
-
-		(when (eq *player* 'w)
-			(cond			
-				(when (< sumB sumW)
-					(format t "You win! The score is ~a ~a" sumA sumB)
-				)
-
-				(when (> sumB sumW)
-					(format t "You lose! The score is ~a ~a" sumA sumB)
-				)
-			)
+			
+		(when (> sumB sumW)
+			(format t "You lose! The score is ~a ~a" sumW sumB)
 		)
 	)
+	(format t "done")
 	)
+
+(format t "~%done")
 )
 
 
