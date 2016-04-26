@@ -88,6 +88,19 @@ Functions called:
 (defun othello (args)
 	(input args)
 	(format t "~%Welcome to Othello. Let the match begin!~%")
+	
+	; This special case handling will have the AI make the first move if it
+	; is the first player before entering the main game loop.
+	(when (equal *AIColor* 'b)
+		(print-othello *board*)
+		(format t "~%~%Opponent's move:")
+		(setf lst (minimax *board* 2 *AIColor* -100000 100000 t))
+		(when (not (null lst))
+			(setf *board* (nth 0 (nth 1 lst)))
+		)
+		(format t "~%")		
+	)	
+
 	(play-game)	
 	(score)
 	(end-game)
@@ -141,18 +154,7 @@ Functions called:
 		 
 		(setf userMoveless (player-no-move))
 		(setf aiMoveless (AI-no-move))
-		; This special case handling will have the AI make the first move if it
-		; is the first player before entering the main game loop.
-
-			(when (equal *AIColor* 'b)
-				(print-othello *board*)
-				(format t "~%~%Opponent's move:")
-				(setf lst (minimax *board* 2 *AIColor* -100000 100000 t))
-				(when (not (null lst))
-					(setf *board* (nth 0 (nth 1 lst)))
-				)
-				(format t "~%")		
-			)		
+	
 		
 		; Enter main game loop with enough turns for a full game
 		(do ( ( i 0 (1+ i) ) )
@@ -229,7 +231,7 @@ Functions called: none
 *****************************************************************************|#
 
 (defun score ()
-	(let (playAgain enColor sumB sumW)
+	(let (sumB sumW)
 	(setf sumW 0)
 	(setf sumB 0)	
 
@@ -269,10 +271,8 @@ Functions called: none
 			(format t "You lose! The score is ~a ~a" sumW sumB)
 		)
 	)
-	(format t "done")
+	
 	)
-
-(format t "~%done")
 )
 
 
@@ -334,11 +334,6 @@ Functions called:
 )				
 
 
-;call to start game
-(if (> (length *args*) 0)
-	(othello *args*)
-)
-
 
 (defun make-move (lst color ply)
 		(let (newmove pos col row)
@@ -359,4 +354,10 @@ Functions called:
 		)
 		pos
 	)
+)
+
+
+;call to start game
+(if (> (length *args*) 0)
+	(othello *args*)
 )

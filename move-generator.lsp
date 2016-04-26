@@ -109,7 +109,6 @@ Functions called:
 	
 (defun print-othello (oth)
 ;	(setf *lst2* oth)
-	(print "check")
 	(format t "~%   1 2 3 4 5 6 7 8")
 	;Loop through orthello lst
 	(dotimes (indexX (* 8 8) 0)
@@ -121,7 +120,6 @@ Functions called:
 		(format t "~s "(nth indexX oth))
 	
 	)
-	(print "check2")
 )
 
 
