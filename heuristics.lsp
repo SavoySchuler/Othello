@@ -9,7 +9,9 @@ Description:
 Usage:		
 
 
-Returns:	
+Returns:	(sum)
+	
+	
 
 
 Functions called:
@@ -18,25 +20,25 @@ Functions called:
 *****************************************************************************|#
 
 (defun more-player-count (position color)
-	(let (enColor sum)
+	(let (sum)
+	
+		;begin count at zero	
 		(setf sum 0)
-		
-		(if (equal color 'w)
-			(setf enColor 'b)
-			(setf enColor 'w)
-		)	
 
-
+	; Iterate through the board, adding one for each player piece and subtracting
+	; one for each AI piece
 	(dolist (tilePiece position)  
 		
-	 	(when (equal color tilePiece) 
+	 	(when (equal *player* tilePiece) 
 			(setf sum (+ sum 1))
 		)
 	
-		(when (equal enColor tilePiece)
+		(when (equal *AIColor* tilePiece)
 			(setf sum (- sum 1))
 		)
 	)
+	
+	; Return sum once finished.
 	sum
 	)	
 )

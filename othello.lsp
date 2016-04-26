@@ -40,8 +40,8 @@
 	- - - - - - - - 
 	- - - - - - - - 
 	- - - - - - - - 
-	- - - W B - - - 
-	- - - B W - - - 
+	- - - B B - - - 
+	- - - B B - - - 
 	- - - - - - - - 
 	- - - - - - - - 
 	- - - - - - - -
@@ -201,8 +201,7 @@ Functions called:
 	
 			; Loop	
 		)
-	)
-;;	
+	)	
 )
 
 
@@ -231,10 +230,12 @@ Functions called: none
 *****************************************************************************|#
 
 (defun score ()
+	;Start counts at zero
 	(let (sumB sumW)
 	(setf sumW 0)
 	(setf sumB 0)	
 
+	; Count number of black and white pieces
 	(dolist (tilePiece *board*)  
 	 	(when (equal tilePiece 'B) 
 			(setf sumB (+ sumB 1))
@@ -244,31 +245,35 @@ Functions called: none
 			(setf sumW (+ sumW 1))
 		)
 	)
-	(print sumW)
-	(print sumB)
 
+	;Print final board state
+	(format t "~%~%~%Game over! Final board state: ~%")
+	(print-othello *board*)
+
+	; Print tie
 	(when (eq sumB sumW)
-		(format t "You tie! The score is ~a - ~a" sumB sumW)
+		(format t "~%~%You tie! The score is ~a - ~a" sumB sumW)
 	)
 
+	;Print cases of win/lose
 	(when (eq *player* 'b)
 		(when (> sumB sumW)
-			(format t "You win! The score is ~a - ~a" sumB sumW)
+			(format t "~%~%You win! The score is ~a - ~a" sumB sumW)
 		)
 
 		(when (< sumB sumW)
-			(format t "You lose! The score is ~a - ~a" sumB sumW)
+			(format t "~%~%You lose! The score is ~a - ~a" sumB sumW)
 		)		
 	)
 
 	(when (eq *player* 'w)
 		
 		(when (< sumB sumW)
-			(format t "You win! The score is ~a - ~a" sumW sumB)
+			(format t "~%~%You win! The score is ~a - ~a" sumW sumB)
 		)
 			
 		(when (> sumB sumW)
-			(format t "You lose! The score is ~a - ~a" sumW sumB)
+			(format t "~%~%You lose! The score is ~a - ~a" sumW sumB)
 		)
 	)
 	

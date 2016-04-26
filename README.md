@@ -4,14 +4,12 @@ CSC447 Artificial Intelligence - Project 3
 Partners: Savoy Schuler, Alex Nienhueser
 
 To do:	
-		terminate game(doublecheck)			- Alex
-		test alpha-beta  		- Alex, Savoy
-		fix heuristics			- Alex
-		check score, endgame	- Savoy
+		terminate game		- Alex
+		fix heuristics		- Alex
 		
 		documentation:
 			heuristics.lsp		(1.5 Alex, 2.5 Savoy)
-			move-generator.lsp	(15 Alex, 1 Savoy)
+			move-generator.lsp	(15 Alex)
 			othello.lsp 		(main program header only)
 			
 Done:

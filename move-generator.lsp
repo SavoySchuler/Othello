@@ -1,82 +1,60 @@
-#|**************************************************************************
- Filename: orthello.lsp
-
-
- Authors: Alex Nienhueser, Savoy  Schuler
-
-
- Description:
-
-Usage:	
-	
-
-Returns:
-	
-
-Functions called:
-
-
-
-*****************************************************************************|#
-
-;un comment ctrl+k+u
-;Todo Special case for rows and columns for check move
-;Program thinks that two pieces next to one another is a valid move
-
-
-
-;(defvar *lst2* '(- - - - - - - - - - - - - - - - - - - - - - - - - - - W B - - - - - - B W - - - - - - - - - - - - - - - - - - - - - - - - - - -))
- (defvar *lst2* '(- - - - - - - - - - - - - - - - - - - - - - - - - - B W B - - - - - - B W - - - - - - - - - - - - - - - - - - - - - - - - - - -))
-;UpRight and UpLeft Test 
- ;  (setf *lst2* '(- - - - - - - - - - - - - - - - - - B - - W - - - - - W B - - - - - - B W - - - - - - - - - - - - - - - - - - - - - - - - - - -))
- ;DownRight and DownLeft Test 
-;    (setf *lst2* '(- - - - - - - - - - - - - - - - - - - - - - - - - - - W B - - - - - - B W - - - - - W - - B - - - - - - - - - - - - - - - - - -))
-;Test Down and Right
-;   (setf *lst2* '(- - - B - - - - - - - W - - - - B W W - W B - - - - - W B - - - - - - B W - - - - - W - - B - - - - - - - - - - - - - - - - - -))
-	
-;ALL test
-    (setf *lst2* '(- B - B - B - - - - W W W - - - B W W - W B - - - - W W W - - - - B - B W B B - - - W - - B - - - - - - - - - - - - - - - - - -)) 
-;	(setf *lst2* '(- B W B W B - - - - W W W - - - B W W - W B - - - - W W W - - - - B - B W B B - - - W - - B - W - - - - - - - - - - - - - W B W))
-;(setf *lst2* '(- - - - - - - - - - - - - - - - - - - - - - - - - - - W W - - - - - - W W - - - - - - - - - - - - - - - - - - - - - - - - - - -))
-;(setf *board* *lst2*)
-
 #|*****************************************************************************  
 Authors: Alex Nienheuser, Savoy Schuler
 
-Function:		
+Function:	human-move
 
 Description: 		
 
+	This function is used to make the user's specified move. It will read in 
+	the row column value of the user's specified move and convert it to a board
+	index. It will then check to see if the move is legal. If the move is not
+	legal, it will print a warning and return to play-game() to fetch a new move
+	entered by the user. If the move is legal, it will alter the board state and
+	print the current board to the screen to reflect this change to the user.
+	The end of the function will singal a return to the main game loop 
+	play-game() to continue playing.
 
-Usage:	
+Usage:	(human-move userMove)
 	
+	Where userMove is a list holding the row column value of the move the user
+	would like to make. 
 
-Returns:
+Out: (print-othello *board*)
 	
+	Where the board display shows the result of the user playing their move.
 
 Functions called:
 
+	(check-all-moves *board* pos *player*) - to check the legality of the user's
+		chosen move.
+
+	(play-game) - recursively get userMove if the entered move is invalid
+
+	(print-othello *board*) - to print the board after the user move has been
+		placed.
 
 *****************************************************************************|#
 
 (defun human-move (userMove)
 	(let (pos posCol posRow lst)
-		;convert user input to board position	
-		;This step could be done in one line, but is broken apart for readability
+
+		; Convert user input to board position - this step could be done in one
+		; line, but is broken apart for readability.
 		(setf posRow (* (- (car userMove) 1) 8))
 		(setf posCol (- (cadr userMove) 1))
 		(setf pos (+ posCol posRow))
 	
-		;check for legality
-		
-		;place move in board 
+		;check for legality of the user's move
 		(setf lst (check-all-moves *board* pos *player*))
 		(cond 		
 			((null lst)
+				; If invalid, return to play-game to call again
 				(format t "Invalid move, try again.")		
 		 		(play-game)
 			)		
 			
+			; Else, if valid, make the the move and return the board displaying 
+			; it.
 			(t 
 				(setf *board* lst)
 				(format t "~%Your move:")
