@@ -1,97 +1,67 @@
 #|*****************************************************************************  
 Author: Alex Nienheuser, Savoy Schuler
 
-Function:		
+Function:	more-player-count	
 
-Description: 		
+Description: 
 
+	This function is a state evaluation heuristic that returns a number 
+	representing how many more player pieces are in a board state than opponent 
+	pieces (naturally meaning a negative number will be returned if there are 
+	more oppoent pieces than player pieces). The more positive a number 
+	returned, the more advantageous the board state	is for the color passed in. 
 
-Usage:		
+Usage:	(more-player-count position color)
 
+	Where position is a given board state and color is the color the player we 
+	are seeking evaluation for. 
 
-Returns:	(sum)
+Returns: (sum)
 	
-	
+	Where sum is the count of how many more player pieces than opponent pieces
+	exist in a board state. 
 
-
-Functions called:
-
+Functions called: none
 
 *****************************************************************************|#
-
+	
 (defun more-player-count (position color)
-	(let (sum)
-	
-		;begin count at zero	
-		(setf sum 0)
-
-	; Iterate through the board, adding one for each player piece and subtracting
-	; one for each AI piece
-	(dolist (tilePiece position)  
-		
-	 	(when (equal *player* tilePiece) 
-			(setf sum (+ sum 1))
-		)
-	
-		(when (equal *AIColor* tilePiece)
-			(setf sum (- sum 1))
-		)
-	)
-	
-	; Return sum once finished.
-	sum
-	)	
-)
-
-
-#|*****************************************************************************  
-Author: Alex Nienheuser, Savoy Schuler
-
-Function:		
-
-Description: 		
-
-
-Usage:	
-	
-
-Returns:
-	
-
-Functions called:
-
-
-
-*****************************************************************************|#
-
-(defun more-opponent-count (position color)
 	(let (enColor sum)
+		
+		;Start sum at zero
 		(setf sum 0)
 		
+		;Set values for player and enemy player
 		(if (equal color 'w)
 			(setf enColor 'b)
 			(setf enColor 'w)
 		)	
 
+	; Iterate through the pieces on the board adding one for each player piece 
+	; an subtracting one for each enemy piece
 	(dolist (tilePiece position)  
 		
 	 	(when (equal color tilePiece) 
-			(setf sum (- sum 1))
+			(setf sum (+ sum 1))
 		)
 	
 		(when (equal enColor tilePiece)
-			(setf sum (+ sum 1))
+			(setf sum (- sum 1))
 		)
 	)
+
+	; Return sum
 	sum
 	)	
 )
 
 
+
+
 #|*****************************************************************************  
 Author: Alex Nienheuser, Savoy Schuler
 
-Function:		
+Function: position-strategy	
 
 Description: 		
 

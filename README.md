@@ -8,7 +8,7 @@ To do:
 		fix heuristics		- Alex
 		
 		documentation:
-			heuristics.lsp		(1.5 Alex, 2.5 Savoy)
+			heuristics.lsp		(1.5 Alex, 0.5 Savoy)
 			move-generator.lsp	(15 Alex)
 			othello.lsp 		(main program header only)
 			

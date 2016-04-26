@@ -265,7 +265,7 @@ Functions called:
 	;heuristic to play for less pieces early on, then reverse
 	(if (< sumBlanks 25)
 		(setf sum (+ sum (more-player-count position color)))
-		(setf sum (+ sum (more-opponent-count position color)))
+		(setf sum (- sum (more-player-count position color)))
 	)
 
 	;return sum
