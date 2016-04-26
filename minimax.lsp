@@ -245,10 +245,10 @@ Functions called:
 	
 	;keep running sum of added value of each heuristic
 	(setf sum (+ sum (position-strategy position color)))
-;	(setf sum (+ sum (is-between color position *edgeTopRow* 1)))
-;	(setf sum (+ sum (is-between color position *edgeBottomRow* 1)))
-;	(setf sum (+ sum (is-between color position *edgeLeftColumn* 8)))
-;	(setf sum (+ sum (is-between color position *edgeRightColumn* 8)))
+	(setf sum (+ sum (is-between color position *edgeTopRow* 1)))
+	(setf sum (+ sum (is-between color position *edgeBottomRow* 1)))
+	(setf sum (+ sum (is-between color position *edgeLeftColumn* 8)))
+	(setf sum (+ sum (is-between color position *edgeRightColumn* 8)))
 	
 
 	;find out how many blank spaces remain	
@@ -266,9 +266,10 @@ Functions called:
 	)
 
 	;return sum
-	(if (null sum)
-		(- sum)
-		sum
-	)
+;	(if (null sum)
+;		(- 0 sum)
+;		sum
+;	)
+	sum
 	)
 )

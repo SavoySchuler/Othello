@@ -40,8 +40,8 @@
 	- - - - - - - - 
 	- - - - - - - - 
 	- - - - - - - - 
-	- - - W B - - - 
 	- - - B W - - - 
+	- - - W B - - - 
 	- - - - - - - - 
 	- - - - - - - - 
 	- - - - - - - -
@@ -137,8 +137,10 @@ Functions called:
 *****************************************************************************|#
 
 (defun play-game ()
-	(let (userMove)		
+	(let (userMove userMoveless aiMoveless)		
 		 
+		(setf userMoveless (player-no-move))
+		(setf aiMoveless (AI-no-move))
 		; This special case handling will have the AI make the first move if it
 		; is the first player before entering the main game loop.
 
@@ -156,11 +158,12 @@ Functions called:
 		(do ( ( i 0 (1+ i) ) )
 			
 			; Check if game should terminate. 
-			(( >= i 30) ‘done)  ;termination test
+			((or ( >= i 30) (and (eq userMoveless 0) (eq aiMoveless 0))))  ;termination test
 			
 			; Reset userMove each time for reading in user's move each turn.
 			(setf userMove () )
 			
+			(when (equal userMoveless 1)
 			; Print board preceding user's move (will be AI's move each 
 			; consequent turn)
 			(format t "")	
@@ -173,18 +176,29 @@ Functions called:
 			
 			; Make user's move
 			(human-move userMove)
-
-			; Call functions to make IA"s move	
+			)
+			
+			(setf userMoveless (player-no-move))
+			(setf aiMoveless (AI-no-move))
+			
+			
+			(when (equal userMoveless 1)
+			; Call functions to make IA"s move
 			(format t "~%~%Opponent's move:")
 			(setf lst (minimax *board* 2 *AIColor* -100000 100000 t))
 			(when (not (null lst))
 				(setf *board* (nth 0 (nth 1 lst)))
 			)
 			(format t "~%")		
+			)
+			
+			(setf userMoveless (player-no-move))
+			(setf aiMoveless (AI-no-move))
 	
 			; Loop	
 		)
 	)
+;;	
 )
 
 
@@ -217,7 +231,6 @@ Functions called: none
 	(setf sum 0)	
 
 	(dolist (tilePiece *board*)  
-		
 	 	(when (equal tilePiece 'b) 
 			(setf sum (+ sumB 1))
 		)
@@ -226,7 +239,6 @@ Functions called: none
 			(setf sum (+ sumW 1))
 		)
 	)
-
 	(cond
 		(when (eq sumB sumA)
 			(format t "You tie! The score is ~a ~a" sumB sumA)
@@ -296,8 +308,7 @@ Functions called:
 	
 	; When play again selected, reset the board position and call the program's
 	; main function.
-	(cond 
-		(when (equalp 'y playAgain)
+		(when (equal 'y playAgain)
 			(setf *board* '(
 			- - - - - - - - 
 			- - - - - - - - 
@@ -307,19 +318,26 @@ Functions called:
 			- - - - - - - - 
 			- - - - - - - - 
 			- - - - - - - -))	
-			(othello)
+			(othello *args*)
 		)
 			
 		; End program when player decides not to play again.
 		(when (equalp 'n playAgain)
 			(quit)
 		)
-	)
-
 	; Recursively call end game until valid input is entered.
 	end-game						
 )				
 
 
 ;call to start game
-(othello *args*)
+(if (> (length *args*) 0)
+	(othello *args*)
+)
+
+
+(defun make-move (lst color ply)
+	(let ()
+		(setf lst (minimax lst ply color -100000 100000 t))
+	)
+)

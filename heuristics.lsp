@@ -106,7 +106,15 @@ Functions called:
 *****************************************************************************|#
 
 (defun position-strategy (position color)
-	(let (lst sum)
+	(let (lst sum enColor)
+		
+		(cond	
+		((equal color 'w)
+		(setq enColor 'b))
+
+		((equal color 'w)
+		(setq enColor 'b))		
+	)
 		
 		(setf sum 0)
 		(setf lst (all-positions color position))
@@ -115,6 +123,11 @@ Functions called:
 			(setf sum (+ sum (nth indexX *positionalStrat*)))
 		)
 		
+		(setf lst (all-positions enColor position))
+		
+		(dolist (indexX lst)
+			(setf sum (- sum (nth indexX *positionalStrat*)))
+		)
 		sum
 	)
 )

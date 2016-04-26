@@ -37,7 +37,8 @@ Functions called:
 ;ALL test
     (setf *lst2* '(- B - B - B - - - - W W W - - - B W W - W B - - - - W W W - - - - B - B W B B - - - W - - B - - - - - - - - - - - - - - - - - -)) 
 ;	(setf *lst2* '(- B W B W B - - - - W W W - - - B W W - W B - - - - W W W - - - - B - B W B B - - - W - - B - W - - - - - - - - - - - - - W B W))
-
+;(setf *lst2* '(- - - - - - - - - - - - - - - - - - - - - - - - - - - W W - - - - - - W W - - - - - - - - - - - - - - - - - - - - - - - - - - -))
+;(setf *board* *lst2*)
 
 #|*****************************************************************************  
 Authors: Alex Nienheuser, Savoy Schuler
@@ -108,7 +109,7 @@ Functions called:
 	
 (defun print-othello (oth)
 ;	(setf *lst2* oth)
-
+	(print "check")
 	(format t "~%   1 2 3 4 5 6 7 8")
 	;Loop through orthello lst
 	(dotimes (indexX (* 8 8) 0)
@@ -120,8 +121,7 @@ Functions called:
 		(format t "~s "(nth indexX oth))
 	
 	)
-
-
+	(print "check2")
 )
 
 
@@ -327,9 +327,9 @@ Functions called:
 		;(setf pos (all-positions color oth))
 		(setf indexX pos)	
 		
-		(when (or (= indexX 1) (= indexX 8))
-			(print "Is Totally a zero")
-		)
+;		(when (or (= indexX 1) (= indexX 8))
+;			(print "Is Totally a zero")
+;		)
 		
 		;Determine if the left sucessor can be generated
 		(when (and (> (mod indexX 8) 0)
@@ -341,17 +341,17 @@ Functions called:
 		
 		;Determine if the right sucessor can be generated
 		(when (< (mod indexX 8) (- 8 1))
-			(when (or (= indexX 1) (= indexX 8))
-			(print "R 1 or 8")
-		)
+;			(when (or (= indexX 1) (= indexX 8))
+;			(print "R 1 or 8")
+;		)
 			(setf right (check-move-R oth indexX endColor ))
 		)
 
 		;Determine if the up sucessor can be generated 
 		(when (>= (/ indexX (float 8)) 1)	
-			(when (or (= indexX 1) (= indexX 8))
-			(print "up 1 or 8")
-		)
+;			(when (or (= indexX 1) (= indexX 8))
+;			(print "up 1 or 8")
+;		)
 			(setf up (check-move-U oth indexX endColor ))
 		)
 		
@@ -381,9 +381,9 @@ Functions called:
 		(when (and (< (mod indexX 8) (- 8 1)) (< (/ indexX (float 8)) (- 8 1)))
 			
 			(setf rightDown(check-move-DR oth indexX endColor))
-			(when (= indexX 0)
-			(print "DR")
-		)
+;			(when (= indexX 0)
+;			(print "DR")
+;		)
 		
 			
 		)
@@ -494,13 +494,13 @@ Functions called:
 (defun check-move-UR (oth pos color)
 	(let (row)
 	
-		(setf endPos 0)
+		(setf endPos 7777777)		
 		
 		(setf row (floor (/ pos 8)))
 		
 		(do ((indexX (- pos 7) (setf indexX (+ indexX '-7))))
 					 ; did we find a position/       make sure we dont step off the edge
-			((or (not (equal endPos 0))(< indexX 0)))
+			((or (not (equal endPos 7777777))(< indexX 0)))
 			
 			(setf row (- row 1))
 			
@@ -517,9 +517,11 @@ Functions called:
 				(setf endPos nil)
 			)
 		)
-				
+		(if (eq endPos 7777777)
+			nil
+			endPos
+		)				
 	)
-	endPos
 )
 
 #|*****************************************************************************  
@@ -545,13 +547,13 @@ Functions called:
 (defun check-move-DL (oth pos color)
 	(let (row)
 	
-		(setf endPos 0)
+		(setf endPos 7777777)
 		
 		(setf row (floor (/ pos 8)))
 		
 		(do ((indexX (+ pos 7) (setf indexX (+ indexX '+7))))
 					 ; did we find a position/       make sure we dont step off the edge
-			((or (not (equal endPos 0))(> indexX 63))
+			((or (not (equal endPos 7777777))(> indexX 63))
 				)
 			
 			(setf row (+ row 1))
@@ -570,9 +572,11 @@ Functions called:
 			)
 			
 		)
-				
+		(if (eq endPos 7777777)
+			nil
+			endPos
+		)			
 	)
-	endPos
 )
 
 
@@ -598,13 +602,13 @@ Functions called:
 (defun check-move-DR (oth pos color)
 	(let (row)
 	
-		(setf endPos 0)
+		(setf endPos 7777777)
 		
 		(setf row (floor (/ pos 8)))
 		
 		(do ((indexX (+ pos 9) (setf indexX (+ indexX '+9))))
 					 ; did we find a position/       make sure we dont step off the edge
-			((or (not (equal endPos 0))(> indexX 63))
+			((or (not (equal endPos 7777777))(> indexX 63))
 				)
 			
 			(setf row (+ row 1))
@@ -629,9 +633,11 @@ Functions called:
 			)
 		
 		)
-				
+		(if (eq endPos 7777777)
+			nil
+			endPos
+		)			
 	)
-	endPos
 )
 
 
@@ -658,13 +664,13 @@ Functions called:
 (defun check-move-D (oth pos color)
 	(let (row)
 	
-		(setf endPos 0)
+		(setf endPos 7777777)
 		
 		(setf row (floor (/ pos 8)))
 		
 		(do ((indexX (+ pos 8) (setf indexX (+ indexX '+8))))
 					 ; did we find a position
-			((or (not (equal endPos 0))(> indexX 63)))
+			((or (not (equal endPos 7777777))(> indexX 63)))
 			
 			(when(and (not(equal indexX (- pos 8)))(equal (nth indexX oth) color))
 				(setf endPos indexX)
@@ -680,9 +686,12 @@ Functions called:
 			)
 			
 		)
-				
+		
+		(if (eq endPos 7777777)
+			nil
+			endPos
+		)	
 	)
-	endPos
 )
 
 
@@ -709,7 +718,7 @@ Functions called:
 (defun check-move-U (oth pos color)
 	(let (row)
 	
-		(setf endPos 7777777	)
+		(setf endPos 7777777)
 		
 		(setf row (floor (/ pos 8)))
 		
@@ -767,13 +776,13 @@ Functions called:
 (defun check-move-R (oth pos color)
 	(let (row)
 	
-		(setf endPos 0)
+		(setf endPos 7777777)
 		
 		(setf row (floor (/ pos 8)))
 		
 		(do ((indexX (+ pos 1) (setf indexX (+ indexX 1))))
 					 ; did we find a position
-			((or (not (equal endPos 0))(>= indexX 64))
+			((or (not (equal endPos 7777777))(>= indexX 64))
 				)
 			
 			(when(and (not(equal indexX (+ pos 1)))(equal (nth indexX oth) color))
@@ -790,9 +799,12 @@ Functions called:
 			)
 
 		)
-				
+
+		(if (eq endPos 7777777)
+			nil
+			endPos
+		)	
 	)
-	endPos
 )
 
 
@@ -934,8 +946,8 @@ Functions called:
 
 (defun AI-no-move ()
 	(if (null (move-generator *board* *AIColor*))
-		nil
-		t
+		0
+		1
 	)
 
 )
@@ -962,19 +974,11 @@ Functions called:
 
 (defun player-no-move ()
 	(if (null (move-generator *board* *player*))
-		nil
-		t
+		0
+		1
 	)
 
 )
 
-;(B W W W W W - -
-; B - B B W W - -
-; B B B W W W W W
-; B B B B B W - -
-; B B B B B W - -
-; B W W W W W W -
-; B B B B W - B -
-; B B B W W W - -)
 
 
