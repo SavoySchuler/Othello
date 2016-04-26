@@ -3,18 +3,18 @@ CSC447 Artificial Intelligence - Project 3
 
 Partners: Savoy Schuler, Alex Nienhueser
 
-To do:	terminate game
-		test alpha-beta  
-		fix input
-
-		do we use isBetween or do we only use 2 heuristics in static?
+To do:	
+		terminate game			- Alex
+		test alpha-beta  		- Alex, Savoy
+		fix heuristics			- Alex
+		check score, endgame	- Savoy
 		
 		documentation:
-			heuristics.lsp
-			move-generator.lsp
-			othello.lsp
+			heuristics.lsp		(1.5 Alex, 2.5 Savoy)
+			move-generator.lsp	(15 Alex, 1 Savoy)
+			othello.lsp 		(main program header only)
 			
-Done
+Done:
 
 Savoy: 	human-move
 	othello
