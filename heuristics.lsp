@@ -65,15 +65,25 @@ Function: position-strategy
 
 Description: 		
 
+	This function is a state evaluation heuristic that sums the statistical
+	value of board positions held (looking forward) for the player whose color
+	is passed in and subtracts the corresponding statisitcal value of board
+	positions held by the enemy player. The goal of the heuristic is to return
+	a sum that represents the numerical value of a move choice to the static
+	evaluation function. 
 
-Usage:	
-	
+Usage:	(position-strategy position color)
 
-Returns:
-	
+	Where position is a given board state in question and color is the color of
+	the player we are evaluating the state for. 
+
+Returns: (sum)
+
+	Where sum is value of the position being considered for selection 	
 
 Functions called:
 
+	(all-position) - finds all the positions of a specified color
 
 *****************************************************************************|#
 

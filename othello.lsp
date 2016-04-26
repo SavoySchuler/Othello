@@ -1,25 +1,59 @@
 #|********************************* othello.lsp *******************************
-	Program 3 - Othello Player vs. Artificial Intelligence Game
 
-	Authors: Savoy Schuler, Alex Nienheuser
+Program 3 - Othello Player vs. Artificial Intelligence Game
 
-	Date: April 18, 2016
+Authors: Savoy Schuler, Alex Nienheuser
 
-	Professor: Dr. John Weiss
+Date: April 26, 2016
 
-	Course: CSC 447 - M001
+Professor: Dr. John Weiss
 
-	Usage Instructions: clisp othello <optional player color: B, W, Black, or White>
+Course: CSC 447 - M001
 
-	Example Program Call:	clisp othello b
+Usage Instructions: clisp othello <optional player color: B, W, Black, or White>
 
-	Bugs: 
+Example Program Call:	clisp othello b
+
+Bugs: 
 	
-	Todo: 
+Todo: 
 
-	Program Description:
+Program Description:
 
+	This program is a Lisp-based artificial	intelligence game designed to 
+	compete in a game of othello against a human player. The player may select 
+	whether they want to move first or second (a synonomous decision to choosing
+	to be the black or white player, respectively) in either the command line
+	arguments or when the game begins. The game will open with a welcoming 
+	message to the player, then move to an input function to set player colors
+	for the user and the AI. After giving each player their color, the game will
+	move into a main loop, paly-game(), that will alternate turns between the 
+	user and the AI, altering the board passed between each in a turn-to-turn 
+	basis. When all positions are full or no move is left for either player the
+	main game loop will terminate and the othello() function will move to a 
+	score() function that calculates and displays the score, the winner, and the
+	loser. After displaying this to the player, the main othello() function will
+	move to the end-game() function to ask the player if they would to restart
+	the program and play again or end it. 
 
+	The AI program implements minimax in which it tries to pick the move that 
+	maximizes its score while minimizing the move its opponent can pick on their
+	next turn. This minimax is implemented with alpha-beta pruning which will
+	limit the search tree heursitics performed to improve the efficiency of the
+	program runtime. 
+
+	The program implements three primary heuristics. The first of which is that
+	the AI will value a position based upon its statistical worth in terms of
+	board strategy. This is implemented by valuing the sum of board values 
+	respective to one another when comparing possible board states. The second
+	strategy is based off the observation that it is to the AI's advantage to
+	not play for many pieces early in the game as the center pieces are volatile
+	and will flip many times before the end of the game. If the center pieces
+	are left to be mostly the opponent's, this will open the game up for many
+	high scoring moves by the AI as it plays for high value edge and corner
+	pieces. Lastly, the AI the will play for pieces that sit in between two
+	opponent pieces as these offer optimum chances to flip the user's pieces
+	as the game proceeds. 
 
 *****************************************************************************|#
 
@@ -46,7 +80,6 @@
 	- - - - - - - - 
 	- - - - - - - -
 ) )
-
 
 
 #|*****************************************************************************  
