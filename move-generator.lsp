@@ -218,25 +218,10 @@ Functions called:
 		
 		)
 		
-;		(print-othello left) 
-;		(print-othello right) 
-;		(print-othello up) 
-;		(print-othello down) 
-;		(print-othello leftUp)
-;		(print-othello rightUp)
-;		(print-othello leftDown)
-;		(print-othello rightDown)
+
 		(setf children(remove nil children))
 		(setf children(remove-duplicates children :test #'equal))
 		
-;		(print "")
-;		(print endColor)
-;		(print "Turn")
-;		(print "Printing Othello")
-;		(print-othello oth)
-;		(dolist (indexX children)
-;			(print-othello indexX)
-;		)
 		
 		children
 
@@ -296,38 +281,24 @@ Functions called:
 
 (defun check-all-moves (oth pos endColor)
 (let (indexX lst left right up down leftUp rightUp leftDown rightDown)
-;		(if (eq color 'w)
-;			(setf endColor 'b)
-;			(setf endColor 'w)
-;		)
-		;(setf pos (all-positions color oth))
+
 		(setf indexX pos)	
 		
-;		(when (or (= indexX 1) (= indexX 8))
-;			(print "Is Totally a zero")
-;		)
 		
 		;Determine if the left sucessor can be generated
 		(when (and (> (mod indexX 8) 0)
 			 (not (<= indexX 0) ))
 			 
-	;		 (print indexX)
 			(setf left (check-move-L oth indexX endColor))
 		)
 		
 		;Determine if the right sucessor can be generated
 		(when (< (mod indexX 8) (- 8 1))
-;			(when (or (= indexX 1) (= indexX 8))
-;			(print "R 1 or 8")
-;		)
 			(setf right (check-move-R oth indexX endColor ))
 		)
 
 		;Determine if the up sucessor can be generated 
 		(when (>= (/ indexX (float 8)) 1)	
-;			(when (or (= indexX 1) (= indexX 8))
-;			(print "up 1 or 8")
-;		)
 			(setf up (check-move-U oth indexX endColor ))
 		)
 		
@@ -357,11 +328,7 @@ Functions called:
 		(when (and (< (mod indexX 8) (- 8 1)) (< (/ indexX (float 8)) (- 8 1)))
 			
 			(setf rightDown(check-move-DR oth indexX endColor))
-;			(when (= indexX 0)
-;			(print "DR")
-;		)
-		
-			
+	
 		)
 
 		(setf endPos (list left right up down leftUp rightUp leftDown rightDown))
@@ -370,22 +337,6 @@ Functions called:
 				(setf endPos nil)
 			)
 		)
-		
-		
-		
-;		(print lst)
-;		(Print "-----")
-		
-;		(Print left) 
-;		(Print right) 
-;		(Print up) 
-;		(Print down) 
-;		(Print leftUp)
-;		(Print rightUp)
-;		(Print leftDown)
-;		(Print rightDown)
-
-		
 
 		(setf lst(create-move oth pos endPos endColor))
 		
@@ -596,16 +547,10 @@ Functions called:
 			(when(or (equal (nth indexX oth) '-) (or (not(equal (floor (/ indexX 8)) row)) 
 			(and (< indexX 0) (> indexX 63))))
 				(setf endPos nil)
-				(when (= pos 0)
-				(print "1")
-		)
 			)
 			
 			(when(and (equal indexX (+ pos 9))(equal (nth indexX oth) color))
 				(setf endPos nil)
-				(when (= pos 0)
-			(print "2")
-		)
 			)
 		
 		)
@@ -887,13 +832,8 @@ Functions called:
 		
 		(when (null valid)
 			(setf tempList nil)
-;			(print nil)
 		)
 		
-		;(when (<= pos 0)
-		;	(print "Move Made")
-		;	(print pos)
-		;)
 		
 		tempList
 	)
