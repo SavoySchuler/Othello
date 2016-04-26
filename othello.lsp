@@ -35,13 +35,13 @@
 (defvar *edgeLeftColumn* '(8 16 24 32 40 48 ))
 (defvar *edgeBottomRow*   '(57 58 59 60 61 62 ))
 (defvar *edgeRightColumn*  '(55 47 39 31 23 15))
-(defvar *positionalStrat* '(99 -8 8 6 6 8 -8 99 -8 -24 -4 -3 -3 -4 -24 -8 8 -4 7 4 4 7 -4 8 6 -3 4 0 0 4 -3 6 6 -3 4 0 0 4 -3 6 8 -4 7 4 4 7 -4 8 -8 -24 -4 -3 -3 -4 -24 -8 99 -8 8 6 6 8 -8 99))
+(defvar *positionalStrat* '(999 -8 8 6 6 8 -8 999 -8 -24 -4 -3 -3 -4 -24 -8 8 -4 7 4 4 7 -4 8 6 -3 4 0 0 4 -3 6 6 -3 4 0 0 4 -3 6 8 -4 7 4 4 7 -4 8 -8 -24 -4 -3 -3 -4 -24 -8 999 -8 8 6 6 8 -8 999))
 (defvar *board* '(
 	- - - - - - - - 
 	- - - - - - - - 
 	- - - - - - - - 
-	- - - B W - - - 
 	- - - W B - - - 
+	- - - B W - - - 
 	- - - - - - - - 
 	- - - - - - - - 
 	- - - - - - - -
@@ -188,6 +188,8 @@ Functions called:
 			(setf lst (minimax *board* 2 *AIColor* -100000 100000 t))
 			(when (not (null lst))
 				(setf *board* (nth 0 (nth 1 lst)))
+				(print "selected number")
+				(print (nth 0 lst))
 			)
 			(format t "~%")		
 			)
@@ -337,7 +339,22 @@ Functions called:
 
 
 (defun make-move (lst color ply)
-	(let ()
-		(setf lst (minimax lst ply color -100000 100000 t))
+		(let (newmove pos col row)
+		(setf counter 0)	
+		;Obtain list with new mov from AI
+		(setf newmove (nth 0 (nth 1 (minimax lst ply color -100000 100000 t))))	
+		(setf pos nil)
+		
+		;Loop through board until you find newmove
+		(dotimes (indexX 63 0)
+			(when (and (equal(nth indexX lst) '-) (not(equal(nth indexX newmove) '-)))
+				;Once new move is found convert to row col
+				(setf row (+ (floor(/ indexX 8)) 1))
+				(setf col (+ (mod indexX 8) 1))
+				(setf pos (list row col))
+				
+			)
+		)
+		pos
 	)
 )

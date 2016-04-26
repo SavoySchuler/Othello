@@ -4,7 +4,7 @@ CSC447 Artificial Intelligence - Project 3
 Partners: Savoy Schuler, Alex Nienhueser
 
 To do:	
-		terminate game			- Alex
+		terminate game(doublecheck)			- Alex
 		test alpha-beta  		- Alex, Savoy
 		fix heuristics			- Alex
 		check score, endgame	- Savoy
