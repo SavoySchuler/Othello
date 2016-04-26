@@ -372,6 +372,26 @@ Functions called:
 )				
 
 
+#|*****************************************************************************  
+Author: Alex Nienheuser, Savoy Schuler
+
+Function:	make-move	
+
+Description: 
+
+
+
+Usage:	(othello args)
+
+	
+Returns: (end-game)
+
+
+Functions called:
+
+
+
+*****************************************************************************|#
 
 (defun make-move (lst color ply)
 		(let (newmove pos col row)

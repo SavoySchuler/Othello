@@ -10,7 +10,8 @@ To do:
 		documentation:
 			heuristics.lsp		(1 Alex)
 			move-generator.lsp	(15 Alex)
-			othello.lsp 		(main program header only)
+			othello-init	- reinitialize globals
+			othello.lsp 		(1 Alex)
 			
 Done:
 
