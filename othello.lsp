@@ -160,7 +160,7 @@ Functions called:
 		(do ( ( i 0 (1+ i) ) )
 			
 			; Check if game should terminate. 
-			((or ( >= i 30) (and (eq userMoveless 0) (eq aiMoveless 0))))  ;termination test
+			( (and (eq userMoveless 0) (eq aiMoveless 0)))  ;termination test
 			
 			; Reset userMove each time for reading in user's move each turn.
 			(setf userMove () )
@@ -236,11 +236,11 @@ Functions called: none
 	(setf sumB 0)	
 
 	(dolist (tilePiece *board*)  
-	 	(when (equal tilePiece 'b) 
+	 	(when (equal tilePiece 'B) 
 			(setf sumB (+ sumB 1))
 		)
 	
-		(when (equal tilePiece 'w)
+		(when (equal tilePiece 'W)
 			(setf sumW (+ sumW 1))
 		)
 	)
@@ -248,27 +248,27 @@ Functions called: none
 	(print sumB)
 
 	(when (eq sumB sumW)
-		(format t "You tie! The score is ~a ~a" sumB sumW)
+		(format t "You tie! The score is ~a - ~a" sumB sumW)
 	)
 
 	(when (eq *player* 'b)
 		(when (> sumB sumW)
-			(format t "You win! The score is ~a ~a" sumB sumW)
+			(format t "You win! The score is ~a - ~a" sumB sumW)
 		)
 
 		(when (< sumB sumW)
-			(format t "You lose! The score is ~a ~a" sumB sumW)
+			(format t "You lose! The score is ~a - ~a" sumB sumW)
 		)		
 	)
 
 	(when (eq *player* 'w)
 		
 		(when (< sumB sumW)
-			(format t "You win! The score is ~a ~a" sumW sumB)
+			(format t "You win! The score is ~a - ~a" sumW sumB)
 		)
 			
 		(when (> sumB sumW)
-			(format t "You lose! The score is ~a ~a" sumW sumB)
+			(format t "You lose! The score is ~a - ~a" sumW sumB)
 		)
 	)
 	
@@ -307,7 +307,7 @@ Functions called:
 *****************************************************************************|#
 
 (defun end-game ()	
-	(format t "Would you like to play again (y/n)?") 
+	(format t "~%~%Would you like to play again (y/n)?") 
 	(setf playAgain (read))
 	
 	; When play again selected, reset the board position and call the program's
