@@ -2,10 +2,10 @@
  Filename: orthello.lsp
 
 
-Authors: Alex Nienhueser, Savoy  Schuler
+ Authors: Alex Nienhueser, Savoy  Schuler
 
 
-Description:
+ Description:
 
 Usage:	
 	
@@ -324,9 +324,12 @@ Functions called:
 ;			(setf endColor 'b)
 ;			(setf endColor 'w)
 ;		)
-	
 		;(setf pos (all-positions color oth))
 		(setf indexX pos)	
+		
+		(when (or (= indexX 1) (= indexX 8))
+			(print "Is Totally a zero")
+		)
 		
 		;Determine if the left sucessor can be generated
 		(when (and (> (mod indexX 8) 0)
@@ -338,11 +341,17 @@ Functions called:
 		
 		;Determine if the right sucessor can be generated
 		(when (< (mod indexX 8) (- 8 1))
+			(when (or (= indexX 1) (= indexX 8))
+			(print "R 1 or 8")
+		)
 			(setf right (check-move-R oth indexX endColor ))
 		)
 
 		;Determine if the up sucessor can be generated 
-		(when (>= (/ indexX (float 8)) 1)		
+		(when (>= (/ indexX (float 8)) 1)	
+			(when (or (= indexX 1) (= indexX 8))
+			(print "up 1 or 8")
+		)
 			(setf up (check-move-U oth indexX endColor ))
 		)
 		
@@ -372,6 +381,10 @@ Functions called:
 		(when (and (< (mod indexX 8) (- 8 1)) (< (/ indexX (float 8)) (- 8 1)))
 			
 			(setf rightDown(check-move-DR oth indexX endColor))
+			(when (= indexX 0)
+			(print "DR")
+		)
+		
 			
 		)
 
@@ -426,13 +439,13 @@ Functions called:
 (defun check-move-UL (oth pos color)
 	(let (row)
 	
-		(setf endPos 0)
+		(setf endPos 7777777)
 		
 		(setf row (floor (/ pos 8)))
 		
 		(do ((indexX (- pos 9) (setf indexX (+ indexX '-9))))
 					 ; did we find a position/       make sure we dont step off the edge
-			((or (not (equal endPos 0))(< indexX 0))
+			((or (not (equal endPos 7777777))(< indexX 0))
 				)
 			
 			(setf row (- row 1))
@@ -451,9 +464,11 @@ Functions called:
 			)
 			
 		)
-				
+		(if (eq endPos 7777777)
+			nil
+			endPos
+		)		
 	)
-	endPos
 )
 
 #|*****************************************************************************  
@@ -601,10 +616,16 @@ Functions called:
 			(when(or (equal (nth indexX oth) '-) (or (not(equal (floor (/ indexX 8)) row)) 
 			(and (< indexX 0) (> indexX 63))))
 				(setf endPos nil)
+				(when (= pos 0)
+				(print "1")
+		)
 			)
 			
 			(when(and (equal indexX (+ pos 9))(equal (nth indexX oth) color))
 				(setf endPos nil)
+				(when (= pos 0)
+			(print "2")
+		)
 			)
 		
 		)
@@ -688,31 +709,38 @@ Functions called:
 (defun check-move-U (oth pos color)
 	(let (row)
 	
-		(setf endPos 0)
+		(setf endPos 7777777	)
 		
 		(setf row (floor (/ pos 8)))
 		
 		(do ((indexX (- pos 8) (setf indexX (+ indexX '-8))))
 					 ; did we find a position
-			((or (not (equal endPos 0)) (< indexX 0))
+			((or (not (equal endPos 7777777)) (< indexX 0))
 				)
+			
+			(when(and (equal indexX (- pos 8))(equal (nth indexX oth) color))
+				(setf endPos nil)
+			)
 			
 			(when(and (not(equal indexX (- pos 8)))(equal (nth indexX oth) color))
 				(setf endPos indexX)
 			)
 			
 			(when(or (equal (nth indexX oth) '-) 
-			(and (< indexX 0) (> indexX 63)))
+			(and (<= indexX 0) (> indexX 63)))
 				(setf endPos nil)
 			)
 			
-			(when(and (equal indexX (- pos 8))(equal (nth indexX oth) color))
-				(setf endPos nil)
-			)
+			
 		)
 				
 	)
-	endPos
+		
+		(if (eq endPos 7777777)
+			nil
+			endPos
+		)
+	;endPos
 )
 
 
@@ -791,13 +819,13 @@ Functions called:
 (defun check-move-L (oth pos color)
 	(let (row)
 	
-		(setf endPos 0)
+		(setf endPos 7777777)
 		
 		(setf row (floor (/ pos 8)))
 		
 		(do ((indexX (- pos 1) (setf indexX (- indexX 1))))
 					 ; did we find a positionge
-			((or (not (equal endPos 0)) (< indexX 0))
+			((or (not (equal endPos 7777777)) (< indexX 0))
 				)
 			
 			(when(and (not(equal indexX (- pos 1)))(equal (nth indexX oth) color)) 
@@ -813,9 +841,14 @@ Functions called:
 				(setf endPos nil)
 			)
 		)
-				
+		
+		(if (eq endPos 7777777)
+			nil
+			endPos
+		)
+		
 	)
-	endPos
+
 )
 
 
