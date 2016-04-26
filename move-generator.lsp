@@ -2,10 +2,10 @@
  Filename: orthello.lsp
 
 
- Authors: Alex Nienhueser, Savoy  Schuler
+Authors: Alex Nienhueser, Savoy  Schuler
 
 
- Description:
+Description:
 
 Usage:	
 	

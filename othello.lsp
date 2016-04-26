@@ -17,7 +17,7 @@
 	
 	Todo: 
 
-	Program Details:
+	Program Description:
 
 
 
@@ -57,17 +57,24 @@ Function:	othello
 Description: 
 
 	This function is the program main. It will call the the input function to
-	have the user select a side. 
-
+	have the user select a side. Once player colors are set, it will welcome 
+	the user to the game and enter into the main game loop play-game(). When a
+	termination case has been met, the function will move on to the score() and
+	end-game() functions respectively to print the score and then either end the
+	game or play it play it again. 
 
 Usage:	(othello args)
 
-	Where args is the command line parameter passed in, if any, and is passed
-	to the input function to set the user's and AI's player colors.  
+	Where args is the command line parameter passed in to the input function to
+	set the user's and AI's player colors.  
 	
+Returns: (end-game)
 
-Returns:
-	
+	Where end-game() is a function call to ask the player whether they want to
+	end the game or play again. If the player wants to end the game, the program
+	will quit. If they chose to play again it will call the othello() main 	
+	function after resetting globals. If an invalid response is entered, it will
+	call itself again. In this manner, no real return from this funciton exists.
 
 Functions called:
 
@@ -93,19 +100,28 @@ Author: Alex Nienheuser, Savoy Schuler
 Function:	play-game
 
 Description: 
+		
+	This function is the primary loop of the main function othello. In general,
+	it will perform the following four operations:
 
-																				;;;; stuff here, waiting to see if opp-first gets merged in
+		1. Ask for, validate, and make move.
+		2. Print board reflecting user's move.
+		3. Make AI move.
+		4. Print board reflecting AI's move. 
+		5. Repeat loop. 
 
-
-Usage:	(play-game)
-	
+	If in the special case that the AI is the first player (black), the AI will 
+	make its first move before entering this loop. There is a termination test
+	at the start of each cycle to check if the game should end. Additionally,
+	there are checks to see if the AI and the player have no move. If this case
+	happens for both, it means the game has come to a halt and will terminate. 																	
+Usage:	(play-game)	
 
 Out:  (*board*)
 
 	Where *board* is the global state of the game board modified every turn by
 	a players move. 
 	
-
 Functions called:
 
 	(print-othello *board*) - to print the board before every player move.
@@ -118,12 +134,14 @@ Functions called:
 		initial state on the max level, and then applied to the game board,
 		*board*.
 
-
 *****************************************************************************|#
 
 (defun play-game ()
 	(let (userMove)		
 		 
+		; This special case handling will have the AI make the first move if it
+		; is the first player before entering the main game loop.
+
 			(when (equal *AIColor* 'b)
 				(print-othello *board*)
 				(format t "~%~%Opponent's move:")
@@ -131,27 +149,40 @@ Functions called:
 				(when (not (null lst))
 					(setf *board* (nth 0 (nth 1 lst)))
 				)
-				(format t "~%")	
-				
+				(format t "~%")		
 			)		
 		
-
+		; Enter main game loop with enough turns for a full game
 		(do ( ( i 0 (1+ i) ) )
-			(( >= i 70) ‘done)  ;termination test
+			
+			; Check if game should terminate. 
+			(( >= i 30) ‘done)  ;termination test
+			
+			; Reset userMove each time for reading in user's move each turn.
 			(setf userMove () )
+			
+			; Print board preceding user's move (will be AI's move each 
+			; consequent turn)
 			(format t "")	
 			(print-othello *board*)		
 			(format t "~%~%What is your move [row col]? ")
+			
+			; Read user move
 			(setf userMove (append userMove (list (read))))
 			(setf userMove (append userMove (list (read))))		
+			
+			; Make user's move
 			(human-move userMove)
-;AI Move	
+
+			; Call functions to make IA"s move	
 			(format t "~%~%Opponent's move:")
 			(setf lst (minimax *board* 2 *AIColor* -100000 100000 t))
 			(when (not (null lst))
 				(setf *board* (nth 0 (nth 1 lst)))
 			)
-			(format t "~%")			
+			(format t "~%")		
+	
+			; Loop	
 		)
 	)
 )
@@ -163,18 +194,21 @@ Author: Alex Nienheuser, Savoy Schuler
 
 Function:	score	
 
-Description: 		
-
-
-Usage:	
+Description: 
 	
+	This function is called upon completion of a game to count and display each 
+	player's number of pieces left on the board. Depending on the user's color 
+	choice and outcome, the function will display a 'win' or 'lose' message and 
+	will always position the scores as "User - AI" for clarity. 	
 
-Returns:
-	
+Usage:	(score)
 
-Functions called:
+Out: (sumB sumW)
 
+	Where sumB is the sum of the black player's pieces and sumW is the sum of
+	the white player's pieces at  the end of the game. 	
 
+Functions called: none
 
 *****************************************************************************|#
 
@@ -233,16 +267,26 @@ Function:	end-game
 
 Description: 		
 
+	This function is the last call of the othello main function and occurs at
+	the completion (termination) of a game. It will prompt the user asking if 
+	they would like to play again or quit. If the player chooses to play again,
+	the global variables will be reset and (othello) will be called start the
+	game again. If the player chooses to quit, the program will end. 
 
-Usage:	
+Usage:	(end-game)
 	
+Returns: none
 
-Returns:
-	
+	The function will either end the program if quit is selected or restart it
+	if the player chooses to play again.
 
 Functions called:
 
+	(othello) - to restart the game, if selected
 
+	(quit) - to end the program, selected
+
+	(end-game) - a recursive call to itself until valid input is entered
 
 *****************************************************************************|#
 
@@ -250,6 +294,8 @@ Functions called:
 	(format t "Would you like to play again (y/n)?") 
 	(setf playAgain (read))
 	
+	; When play again selected, reset the board position and call the program's
+	; main function.
 	(cond 
 		(when (equalp 'y playAgain)
 			(setf *board* '(
@@ -264,14 +310,16 @@ Functions called:
 			(othello)
 		)
 			
+		; End program when player decides not to play again.
 		(when (equalp 'n playAgain)
 			(quit)
 		)
 	)
 
+	; Recursively call end game until valid input is entered.
 	end-game						
 )				
 
 
-
+;call to start game
 (othello *args*)
