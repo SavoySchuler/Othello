@@ -861,7 +861,7 @@ Functions called:
 *****************************************************************************|#
 
 (defun AI-no-move ()
-	(if (null (move-generator *board* *AIColor*))
+	(if (null (move-generator *board* *player*))
 		0
 		1
 	)
@@ -889,7 +889,7 @@ Functions called:
 *****************************************************************************|#
 
 (defun player-no-move ()
-	(if (null (move-generator *board* *player*))
+	(if (null (move-generator *board* *AIColor*))
 		0
 		1
 	)
