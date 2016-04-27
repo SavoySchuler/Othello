@@ -30,9 +30,6 @@ Savoy: 	human-move
 	formatting
 
 
-Errors: ai no moves
-
-make move
 
 Alex:	print-othello
 	move-generator
@@ -46,4 +43,5 @@ Alex:	print-othello
 	aroundConerHeuristic	-discarded heuristic, was completed	
 	betweenEdgePieces		-discarded heuristic, was completed
 	documentation
+	make-moce
 

@@ -30,8 +30,30 @@ Functions called:
 
 *****************************************************************************|#
 
-(defun input(args)
+(defun input(args)	
 	(cond 
+		((not (listp args))
+		
+		(when (equalp "Black" args)
+				(setf *player* 'b)
+			)
+			
+			(when (equalp "White" args)
+				(setf *player* 'w)
+			)
+
+			(when (equalp "b" args)
+				(setf *player* 'b)					
+			)
+			
+			(when (equalp "w" args)
+				(setf *player* 'w)
+			)
+					
+			(when (null *player*)
+				(no-input)
+			)	
+		)		
 		((= (length args) 1)  	
 
 			(when (equalp "Black" (car args))

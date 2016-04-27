@@ -74,8 +74,8 @@ Program Description:
 	- - - - - - - - 
 	- - - - - - - - 
 	- - - - - - - - 
-	- - - B W - - - 
-	- - - W B - - - 
+	- - - W W - - - 
+	- - - W W - - - 
 	- - - - - - - - 
 	- - - - - - - - 
 	- - - - - - - -
@@ -360,7 +360,10 @@ Functions called:
 			- - - - - - - - 
 			- - - - - - - - 
 			- - - - - - - -))	
-			(othello *args*)
+			(setf *player* NIL)
+			(setf *AIColor* NIL)
+			(no-input)
+			(othello *player*)
 		)
 			
 		; End program when player decides not to play again.
