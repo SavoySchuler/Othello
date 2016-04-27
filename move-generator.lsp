@@ -38,6 +38,17 @@ Functions called:
 (defun human-move (userMove)
 	(let (pos posCol posRow lst)
 
+		; Catch for if entered numbers are too large
+		(when (> (car userMove) 8)
+		(format t "Row value too large, try again.")
+			(play-game)
+		)
+
+		(when (> (cadr userMove) 8)
+			(format t "Column value too large, try again.")
+			(play-game)
+		)
+
 		; Convert user input to board position - this step could be done in one
 		; line, but is broken apart for readability.
 		(setf posRow (* (- (car userMove) 1) 8))
