@@ -119,15 +119,21 @@ Functions called:
 #|*****************************************************************************  
 Author: Alex Nienheuser, Savoy Schuler
 
-Function:		
+Function:	is-between	
 
 Description: 		
 
+		This function is a hueristic that will will add 30 if the AI is on the
+		edge of the board and also between two enemy pieces.
 
-Usage:	
+
+Usage:		(is-between color position side offset) - This function takes a color
+		that will will be checked if it's inbetween two pieces, a postion to check
+		a side of the board to compare it too , and and offset.
 	
 
-Returns:
+Returns: 	-This will return a total based of the ability to move between to enemy	
+		pieces while still on the edge.
 	
 
 Functions called:

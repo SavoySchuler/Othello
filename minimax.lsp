@@ -65,9 +65,7 @@ Added functions called:
     ; if we have searched deep enough, or there are no successors,
     ; return position evaluation and nil for the path
     (if (or (deepenough depth) (null (move-generator position color)))
-;        (when t
-			;(setf counter (+ counter 1))
-			;(print (static position color))
+
 			(list (static position color) nil)  ;Heuristic calc
 
         ; otherwise, generate successors and run minimax recursively
@@ -233,14 +231,6 @@ Functions called:
 (defun static (position color)
 	(let (sum numBlanks)
 	
-	;switch the color to represent the player who will have the next turn
-;	(cond	
-;		((equal color 'w)
-;		(setq color 'b))
-;
-;		((equal color 'w)
-;		(setq color 'b))		
-;	)
 
 	;initialize sums to zero
 	(setf sum 0)
@@ -268,11 +258,7 @@ Functions called:
 		(setf sum (- sum (more-player-count position color)))
 	)
 
-	;return sum
-;	(if (null sum)
-;		(- 0 sum)
-;		sum
-;	)
+
 	sum
 	)
 )

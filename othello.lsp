@@ -82,6 +82,8 @@ Program Description:
 ) )
 
 
+
+
 #|*****************************************************************************  
 Author: Alex Nienheuser, Savoy Schuler
 
@@ -186,6 +188,8 @@ Functions called:
 	(let (userMove userMoveless aiMoveless)		
 		 
 		(setf userMoveless (player-no-move))
+		;(print (player-no-move))
+		;(print *AIColor*)
 		(setf aiMoveless (AI-no-move))
 	
 		
@@ -197,6 +201,7 @@ Functions called:
 			
 			; Reset userMove each time for reading in user's move each turn.
 			(setf userMove () )
+			
 			
 			(when (equal userMoveless 1)
 			; Print board preceding user's move (will be AI's move each 
@@ -211,7 +216,6 @@ Functions called:
 			
 			; Make user's move
 			(human-move userMove)
-			(print "List of HUMAN")
 			)
 			
 			(setf userMoveless (player-no-move))
@@ -223,10 +227,8 @@ Functions called:
 			(format t "~%~%Opponent's move:")
 			(setf lst (minimax *board* 2 *AIColor* -100000 100000 t))
 			(when (not (null lst))
-				(print "List of nulls")
 				(setf *board* (nth 0 (nth 1 lst)))
 			)
-			(print "List of what??") 
 			(format t "~%")		
 			)
 			

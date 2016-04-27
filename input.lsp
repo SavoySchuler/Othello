@@ -42,11 +42,11 @@ Functions called:
 				(setf *player* 'w)
 			)
 
-			(when (equalp "b" args)
+			(when (equalp 'b args)
 				(setf *player* 'b)					
 			)
 			
-			(when (equalp "w" args)
+			(when (equalp 'w args)
 				(setf *player* 'w)
 			)
 					
