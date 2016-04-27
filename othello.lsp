@@ -120,7 +120,7 @@ Functions called:
 
 *****************************************************************************|#
 
-(defun othello (args)
+(defun othello ( &optional (args nil))
 	(input args)
 	(format t "~%Welcome to Othello. Let the match begin!~%")
 	
