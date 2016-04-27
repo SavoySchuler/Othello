@@ -74,8 +74,8 @@ Program Description:
 	- - - - - - - - 
 	- - - - - - - - 
 	- - - - - - - - 
-	- - - W W - - - 
-	- - - W W - - - 
+	- - - W B - - - 
+	- - - B W - - - 
 	- - - - - - - - 
 	- - - - - - - - 
 	- - - - - - - -
@@ -211,19 +211,22 @@ Functions called:
 			
 			; Make user's move
 			(human-move userMove)
+			(print "List of HUMAN")
 			)
 			
 			(setf userMoveless (player-no-move))
 			(setf aiMoveless (AI-no-move))
 			
 			
-			(when (equal userMoveless 1)
+			(when (equal aiMoveless 1)
 			; Call functions to make IA"s move
 			(format t "~%~%Opponent's move:")
 			(setf lst (minimax *board* 2 *AIColor* -100000 100000 t))
 			(when (not (null lst))
+				(print "List of nulls")
 				(setf *board* (nth 0 (nth 1 lst)))
 			)
+			(print "List of what??") 
 			(format t "~%")		
 			)
 			
